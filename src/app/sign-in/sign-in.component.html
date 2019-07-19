@@ -1,12 +1,14 @@
 <h2 style="text-align:center">로그인</h2>
 
-<form style="text-align:center">
+<form [formGroup]="registerForm">
     <br>
-    <input type="email" name="email" value="이메일">
+    <input type="email" formControlName="email" class="form-control" required>
     <br>
-    <input type="password" name="password" value="비밀번호">
+    <input type="password" class="form-control" formControlName="password" required>
+    <label class="error">{{errorMessage}}</label>
+    <label class="success">{{successMessage}}</label>
     <br><br>
-    <input type="submit"
+    <button type="submit"
         style="
   	color : white;
   	background-color : FF8906;
@@ -22,9 +24,9 @@
     line-height: 1.5;
     border-radius: 0.15rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;"
-
-        value="로그인">
+         (click)="tryRegister(registerForm.value)" class="btn btn-default">Register</button>
 </form>
+
 <hr>
 <div style="text-align:center; margin:40px 0px;">
     <div>아직 바인더스 회원이 아니신가요?</div>
