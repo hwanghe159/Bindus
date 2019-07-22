@@ -30,7 +30,7 @@ export class SignInComponent implements OnInit {
     .then(res => {
       console.log(res);
       this.errorMessage = "";
-      this.successMessage = "Your account has been created";
+      this.successMessage = "계정이 생성되었습니다!";
     }, err => {
       console.log(err);
       this.errorMessage = err.message;

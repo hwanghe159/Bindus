@@ -8,9 +8,10 @@ import { FormControl, FormGroup, FormsModule } from "@angular/forms";
   providedIn: 'root'
 })
 export class AuthService {
+  
+  form = new FormGroup({email:new FormControl(' '), password : new FormControl(' ')});
 
   constructor(private firebaseAuth: AngularFireAuth, private router: Router) { }
-  form = new FormGroup({email:new FormControl(' '), password : new FormControl(' ')});
 
   doRegister(value){
     return new Promise<any>((resolve, reject) => {

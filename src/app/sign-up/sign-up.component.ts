@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormsModule } from "@angular/forms";
+import * as firebase from "firebase";
 
 @Component({
   selector: 'app-sign-up',
@@ -13,6 +14,12 @@ export class SignUpComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
 
+  registerForm = new FormGroup({
+    email: new FormControl(""),
+    password: new FormControl("")
+  })
+
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
@@ -23,7 +30,7 @@ export class SignUpComponent implements OnInit {
     .then(res => {
       console.log(res);
       this.errorMessage = "";
-      this.successMessage = "Your account has been created";
+      this.successMessage = "계정이 생성되었습니다!";
     }, err => {
       console.log(err);
       this.errorMessage = err.message;
