@@ -33,7 +33,15 @@
 <hr>
 <div style="text-align:center; margin:40px 0px;">
     <div>아직 바인더스 회원이 아니신가요?</div>
-    <div>
-        <a [routerLink]="['/signup']">바인더스 가입하기</a>
+    <div class="form-group">
+        <button type="button" class="btn btn-danger btn-block" (click)="signInWithGoogle()">
+            <i class="fa fa-google" aria-hidden="true"></i>
+            Login with Google
+        </button>
+        <br>
+        <button type="button" class="btn btn-danger btn-block" (click)="signInWithFacebook()">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+            Login with Facebook
+        </button>
     </div>
 </div>

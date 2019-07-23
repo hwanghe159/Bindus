@@ -37,4 +37,23 @@ export class SignInComponent implements OnInit {
       this.successMessage = "";
     })
   }
+
+  signInWithGoogle() {
+    this.authService.signInWithGoogle()
+    .then((res) => {
+        var token = (<any>res).credential.accessToken;
+        var user = res.user;
+      })
+    .catch((err) => console.log(err));
+  }
+
+  signInWithFacebook() {
+    this.authService.signInWithFacebook()
+    .then((res) => {
+        var token = (<any>res).credential.accessToken;
+        var user = res.user;
+      })
+    .catch((err) => console.log(err));
+  }
+
 }

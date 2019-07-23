@@ -22,4 +22,16 @@ export class AuthService {
     })
   }
 
+  signInWithGoogle() {
+    return this.firebaseAuth.auth.signInWithPopup(
+      new firebase.auth.GoogleAuthProvider()
+    )
+  }
+  
+  signInWithFacebook() {
+    return this.firebaseAuth.auth.signInWithPopup(
+      new firebase.auth.FacebookAuthProvider()
+    )
+  }
+
 }
