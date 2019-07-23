@@ -13,17 +13,45 @@ export class SignUpComponent implements OnInit {
 
   errorMessage: string;
   successMessage: string;
+  uid:string;
+  email:string;
 
   registerForm = new FormGroup({
     email: new FormControl(""),
     password: new FormControl("")
   })
 
+  
+
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+  this.getUID();
   }
+
+
+
+  
+   getUID(){
+  firebase.auth().onAuthStateChanged(async function(user) {
+    if (user) {
+
+      this.uid= await user.uid;
+      this.email = await user.email;
+          // ...
+    } else {
+      // User is signed out.
+      // ...
+
+      console.log("signed out status");
+    }
+  });
+}
+
+onSubmit(){
+
+}
   
   tryRegister(value){
     this.authService.doRegister(value)

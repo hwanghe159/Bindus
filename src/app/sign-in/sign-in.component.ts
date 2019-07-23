@@ -13,6 +13,7 @@ export class SignInComponent implements OnInit {
 
   errorMessage: string;
   successMessage: string;
+  uid:string;
 
   registerForm = new FormGroup({
     email: new FormControl(""),
@@ -31,6 +32,7 @@ export class SignInComponent implements OnInit {
       console.log(res);
       this.errorMessage = "";
       this.successMessage = "계정이 생성되었습니다!";
+      this.uid=res.user.uid;
     }, err => {
       console.log(err);
       this.errorMessage = err.message;
@@ -43,6 +45,7 @@ export class SignInComponent implements OnInit {
     .then((res) => {
         var token = (<any>res).credential.accessToken;
         var user = res.user;
+        console.log("user="+user+"token="+token)
       })
     .catch((err) => console.log(err));
   }
@@ -52,6 +55,8 @@ export class SignInComponent implements OnInit {
     .then((res) => {
         var token = (<any>res).credential.accessToken;
         var user = res.user;
+        console.log("user="+user+"token="+token);
+
       })
     .catch((err) => console.log(err));
   }
