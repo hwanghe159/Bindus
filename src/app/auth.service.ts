@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormsModule } from "@angular/forms";
+import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
   
   form = new FormGroup({email:new FormControl(' '), password : new FormControl(' ')});
 
-  constructor(private firebaseAuth: AngularFireAuth, private router: Router) { }
+  constructor(private firebaseAuth: AngularFireAuth, private router: Router, private db: AngularFirestore) { }
 
   doRegister(value){
     return new Promise<any>((resolve, reject) => {
@@ -32,6 +33,12 @@ export class AuthService {
     return this.firebaseAuth.auth.signInWithPopup(
       new firebase.auth.FacebookAuthProvider()
     )
+  }
+
+  registerUser(uid, data) {
+    return new Promise<any>((resolve, reject) =>{
+      this.db.collection("user").doc(uid).set(data).then(res => {}, err => reject(err));
+    });
   }
 
 }

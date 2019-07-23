@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, FormsModule } from "@angular/forms";
+import { FormControl, FormGroup, FormsModule, FormBuilder } from "@angular/forms";
 import * as firebase from "firebase";
 
 @Component({
@@ -13,6 +13,9 @@ export class SignUpComponent implements OnInit {
 
   errorMessage: string;
   successMessage: string;
+  userInfo;
+  uid:string = 'abcd';
+  email:string;
 
   registerForm = new FormGroup({
     email: new FormControl(""),
@@ -20,9 +23,20 @@ export class SignUpComponent implements OnInit {
   })
 
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
+    this.userInfo = this.formBuilder.group({
+      name: '',
+      gender: '',
+      birthYear: '',
+      birthMonth: '',
+      birthDate: '',
+      email: ''
+    })
+   }
 
   ngOnInit() {
+    //this.getUID();
+
   }
   
   tryRegister(value){
@@ -37,5 +51,28 @@ export class SignUpComponent implements OnInit {
       this.successMessage = "";
     })
   }
+
+  getUID(){
+    firebase.auth().onAuthStateChanged(async function(user) {
+      if (user) {
   
+        this.uid= await user.uid;
+        this.email = await user.email;
+        console.log("uid: "+this.uid);
+            // …
+      } else {
+        // User is signed out.
+        // …
+  
+        console.log("signed out status");
+      }
+    });
+  }
+
+  onSubmit() {
+    let data = this.userInfo.value;//찾아봐
+    this.authService.registerUser(this.uid, data);
+    
+  }
+
 }
