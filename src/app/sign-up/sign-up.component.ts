@@ -22,7 +22,6 @@ export class SignUpComponent implements OnInit {
     password: new FormControl("")
   })
 
-
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
     this.userInfo = this.formBuilder.group({
       name: '',
@@ -35,10 +34,23 @@ export class SignUpComponent implements OnInit {
    }
 
   ngOnInit() {
-    //this.getUID();
-
+    this.waitForCurrentUser();    //this.getUID();
   }
   
+  async waitForCurrentUser(){
+
+    try {
+       this.uid = await firebase.auth().currentUser.uid;
+       this.email=await firebase.auth().currentUser.email;
+    }
+
+    catch(e){
+     console.log(e)
+    }
+
+  //  return userIdIs(uid);//returns promise
+  };
+
   tryRegister(value){
     this.authService.doRegister(value)
     .then(res => {
@@ -70,9 +82,10 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
+    this.userInfo.patchValue({ email: this.email });
     let data = this.userInfo.value;//찾아봐
     this.authService.registerUser(this.uid, data);
-    
+    console.log(data);
   }
 
 }

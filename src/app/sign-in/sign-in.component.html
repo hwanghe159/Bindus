@@ -1,7 +1,8 @@
-<h2 style="text-align:center">로그인</h2>
+<h2 style="text-align:center">회원가입</h2>
 
 <form [formGroup]="registerForm">
     <div>
+        이메일로 가입하기<br>
         <input type="email" class="form-control" formControlName="email" placeholder="이메일@bindus.com" required>
         <br>
         <input type="password" class="form-control" formControlName="password" placeholder="비밀번호" required>
@@ -27,21 +28,20 @@
     line-height: 1.5;
     border-radius: 0.15rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;"
-        (click)="tryRegister(registerForm.value)" class="btn btn-default">Register</button>
+        (click)="tryRegister(registerForm.value)" class="btn btn-default">회원가입</button>
 </form>
 
 <hr>
 <div style="text-align:center; margin:40px 0px;">
-    <div>아직 바인더스 회원이 아니신가요?</div>
     <div class="form-group">
         <button type="button" class="btn btn-danger btn-block" (click)="signInWithGoogle()">
             <i class="fa fa-google" aria-hidden="true"></i>
-            Login with Google
+            구글로 가입하기
         </button>
         <br>
         <button type="button" class="btn btn-danger btn-block" (click)="signInWithFacebook()">
             <i class="fa fa-facebook" aria-hidden="true"></i>
-            Login with Facebook
+            페이스북으로 가입하기
         </button>
     </div>
 </div>

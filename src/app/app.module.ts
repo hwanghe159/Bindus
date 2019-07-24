@@ -13,13 +13,15 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component'; 
 import { AuthService } from './auth.service';
+import { LogInComponent } from './log-in/log-in.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    LogInComponent
   ],
   imports: [
     BrowserModule,
