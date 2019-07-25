@@ -45,7 +45,7 @@ export class LogInComponent implements OnInit {
 
 
    checkLoggedIn(){
-
+     
     this.firebaseAuth.authState.subscribe((gUser:any)=>{
       if (gUser) {
       this.loginStatus = "로그인된 상태";
