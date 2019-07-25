@@ -50,12 +50,8 @@ export class AuthService {
 
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
       .then(function () {
-        // Existing and future Auth states are now persisted in the current
-        // session only. Closing the window would clear any existing state even
-        // if a user forgets to sign out.
-        // ...
-        // New sign-in will be persisted with session persistence.
         firebase.auth().signInWithEmailAndPassword(email, password);
+        console.log("로그인 성공");
         return firebase.auth().currentUser;
       })
       .catch(function (error) {
