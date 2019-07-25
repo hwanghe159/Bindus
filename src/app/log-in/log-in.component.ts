@@ -32,10 +32,9 @@ export class LogInComponent implements OnInit {
     // this.session$.subscribe(auth => this.loginStatus = auth ? '로그아웃' : '로그인');
   }
 
-  tryLogin(value) {
-    this.authService.loginWithEmail(value.email, value.password);
-    this.checkLoggedIn();
-
+  async tryLogin(value) {
+    await this.authService.loginWithEmail(value.email, value.password);
+    await this.checkLoggedIn();
   }
 
 
