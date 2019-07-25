@@ -18,7 +18,7 @@ export class LogInComponent implements OnInit {
   successMessage: string;
   loginStatus: string;
   session$: Observable<boolean>;
-
+  user:Promise<any>;
   loginForm = new FormGroup({
     email: new FormControl(""),
     password: new FormControl("")
@@ -28,25 +28,32 @@ export class LogInComponent implements OnInit {
 
   ngOnInit() {
     this.checkLoggedIn();
+
     // this.session$ = this.firebaseAuth.authState.map(user => !!user);
     // this.session$.subscribe(auth => this.loginStatus = auth ? '로그아웃' : '로그인');
   }
 
+
+
   async tryLogin(value) {
-    await this.authService.loginWithEmail(value.email, value.password);
-    await this.checkLoggedIn();
-  }
+
+    
+
+     await this.authService.loginWithEmail(value.email, value.password);
+
+     }
 
 
-  async checkLoggedIn(){
+   checkLoggedIn(){
 
-    var user = await firebase.auth().currentUser;
-    console.log(user);
-    if (user) {
+    this.firebaseAuth.authState.subscribe((gUser:any)=>{
+      if (gUser) {
       this.loginStatus = "로그인된 상태";
+      this.router.navigate(['/']);
     } else {
       this.loginStatus = "로그아웃된 상태";
-    }
+    }})
+  
   }
 
   signInWithGoogle() {
