@@ -27,7 +27,7 @@ export class LogInComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private firebaseAuth: AngularFireAuth) { }
 
   ngOnInit() {
-    this.checkLoggedIn();
+
     // this.session$ = this.firebaseAuth.authState.map(user => !!user);
     // this.session$.subscribe(auth => this.loginStatus = auth ? '로그아웃' : '로그인');
   }
