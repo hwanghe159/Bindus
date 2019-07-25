@@ -27,20 +27,27 @@ export class LogInComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private firebaseAuth: AngularFireAuth) { }
 
   ngOnInit() {
+    this.checkLoggedIn();
     // this.session$ = this.firebaseAuth.authState.map(user => !!user);
     // this.session$.subscribe(auth => this.loginStatus = auth ? '로그아웃' : '로그인');
+  }
 
-    var user = firebase.auth().currentUser;
+  tryLogin(value) {
+    this.authService.loginWithEmail(value.email, value.password);
+    this.checkLoggedIn();
 
+  }
+
+
+  async checkLoggedIn(){
+
+    var user = await firebase.auth().currentUser;
+    console.log(user);
     if (user) {
       this.loginStatus = "로그인된 상태";
     } else {
       this.loginStatus = "로그아웃된 상태";
     }
-  }
-
-  tryLogin(value) {
-    this.authService.loginWithEmail(value.email, value.password);
   }
 
   signInWithGoogle() {
