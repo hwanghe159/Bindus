@@ -16,6 +16,7 @@ import { AuthService } from './auth.service';
 import { LogInComponent } from './log-in/log-in.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CreateBoardComponent } from './create-board/create-board.component';
+import { ShowBoardComponent } from './show-board/show-board.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { CreateBoardComponent } from './create-board/create-board.component';
     SignUpComponent,
     LogInComponent,
     NavBarComponent,
-    CreateBoardComponent
+    CreateBoardComponent,
+    ShowBoardComponent
   ],
   imports: [
     BrowserModule,

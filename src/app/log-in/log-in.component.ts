@@ -37,9 +37,17 @@ export class LogInComponent implements OnInit {
 
   async tryLogin(value) {
     await this.authService.loginWithEmail(value.email, value.password);
-
+    /*if(this.isGhost()){
+      this.router.navigate(['/signup']);
+    }
+    else{
+      this.router.navigate(['/']);
+    }*/
   }
 
+  /*isGhost() : boolean{
+    
+  }*/
 
   checkLoggedIn() {
 

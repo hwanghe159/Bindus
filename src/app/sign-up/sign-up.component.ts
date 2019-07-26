@@ -14,7 +14,7 @@ export class SignUpComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   userInfo;
-  uid:string = 'abcd';
+  uid:string;
   email:string;
 
   registerForm = new FormGroup({
