@@ -14,6 +14,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component'; 
 import { AuthService } from './auth.service';
 import { LogInComponent } from './log-in/log-in.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { LogInComponent } from './log-in/log-in.component';
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    LogInComponent
+    LogInComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
