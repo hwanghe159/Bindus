@@ -15,7 +15,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthService } from './auth.service';
 import { LogInComponent } from './log-in/log-in.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { CreateContentsComponent } from './create-contents/create-contents.component';
+import { CreateBoardComponent } from './create-board/create-board.component';
 import { ShowBoardComponent } from './show-board/show-board.component';
 
 
@@ -26,7 +26,7 @@ import { ShowBoardComponent } from './show-board/show-board.component';
     SignUpComponent,
     LogInComponent,
     NavBarComponent,
-    CreateContentsComponent,
+    CreateBoardComponent,
     ShowBoardComponent
   ],
   imports: [
