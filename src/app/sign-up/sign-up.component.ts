@@ -57,6 +57,8 @@ export class SignUpComponent implements OnInit {
       console.log(res);
       this.errorMessage = "";
       this.successMessage = "계정이 생성되었습니다!";
+      this.router.navigate(['/signup']);     
+
     }, err => {
       console.log(err);
       this.errorMessage = err.message;
