@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormsModule } from "@angular/forms";
@@ -20,12 +20,14 @@ export class LogInComponent implements OnInit {
   loginStatus: string;
   session$: Observable<boolean>;
   user: Promise<any>;
+  ghost : boolean;
+  uid : string;
   loginForm = new FormGroup({
     email: new FormControl(""),
     password: new FormControl("")
   })
 
-  constructor(private authService: AuthService, private router: Router, private firebaseAuth: AngularFireAuth, private db: AngularFirestore) { }
+  constructor(private authService: AuthService, private router: Router, private firebaseAuth: AngularFireAuth,private db:AngularFirestore) { }
 
   ngOnInit() {
     this.checkLoggedIn();
@@ -38,18 +40,24 @@ export class LogInComponent implements OnInit {
 
   async tryLogin(value) {
     await this.authService.loginWithEmail(value.email, value.password);
-    /*if(this.isGhost()){
-      this.router.navigate(['/signup']);
-    }
-    else{
-      this.router.navigate(['/']);
-    }*/  }
+    // await this.isGhost();
+    // if(this.ghost){
+    //   this.router.navigate(['/signup']);
+    // }
+    // else{
+    //   this.router.navigate(['/']);
+    // }
+  }
 
+  // isGhost(){
+  //   this.db.collection("user").doc(this.uid);
+  // }
 
   checkLoggedIn() {
 
     this.firebaseAuth.authState.subscribe((gUser: any) => {
       if (gUser) {
+        // this.uid = gUser.uid;
         this.loginStatus = "로그인된 상태";
         this.router.navigate(['/']);
       } else {
@@ -77,19 +85,4 @@ export class LogInComponent implements OnInit {
       .catch((err) => console.log(err));
   }
 
-
-
-  isGhost() {
-    this.db.collection("user")
-    .onSnapshot((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            console.log(doc.data()); // For data inside doc
-            console.log(doc.id); // For doc name
-    }
 }
-
-  }
-}
-
-
-
