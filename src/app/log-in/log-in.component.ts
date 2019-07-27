@@ -6,6 +6,7 @@ import * as firebase from "firebase";
 import { Observable } from 'rxjs';
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
+import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-log-in',
@@ -24,7 +25,7 @@ export class LogInComponent implements OnInit {
     password: new FormControl("")
   })
 
-  constructor(private authService: AuthService, private router: Router, private firebaseAuth: AngularFireAuth) { }
+  constructor(private authService: AuthService, private router: Router, private firebaseAuth: AngularFireAuth, private db: AngularFirestore) { }
 
   ngOnInit() {
     this.checkLoggedIn();
@@ -42,12 +43,8 @@ export class LogInComponent implements OnInit {
     }
     else{
       this.router.navigate(['/']);
-    }*/
-  }
+    }*/  }
 
-  /*isGhost() : boolean{
-    
-  }*/
 
   checkLoggedIn() {
 
@@ -80,4 +77,19 @@ export class LogInComponent implements OnInit {
       .catch((err) => console.log(err));
   }
 
+
+
+  isGhost() {
+    this.db.collection("user")
+    .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            console.log(doc.data()); // For data inside doc
+            console.log(doc.id); // For doc name
+    }
 }
+
+  }
+}
+
+
+
