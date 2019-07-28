@@ -5,8 +5,9 @@ import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from "firebase";
 import { FormControl, FormGroup, FormsModule } from "@angular/forms";
 import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
-import { Observable, of, from } from 'rxjs';
+import { Observable, of, from} from 'rxjs';
 import { AuthService } from '../auth.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-bar',
@@ -20,14 +21,15 @@ export class NavBarComponent implements OnInit {
 
   uid: string;
   isValidUser: boolean;
-
-  ngOnInit() {
-    this.checkLoggedIn();
-    this.getUID();
-    
+  users:any;
+  async ngOnInit() {
+    await this.checkLoggedIn();
+     await this.getUID();
+    this.users=await this.isGhost(this.uid);
+    console.log(this.users);
   }
 
-  checkLoggedIn() {
+  async checkLoggedIn() {
 
     this.firebaseAuth.authState.subscribe((gUser: any) => {
       if (gUser) {
@@ -37,57 +39,51 @@ export class NavBarComponent implements OnInit {
         this.loginStatus = "로그인";
       }
     })
-
+console.log("checkedLoggedIn func() called");
   }
 
 
-   getUID() {
-     firebase.auth().onAuthStateChanged(async function (user) {
+  async getUID() {
+     await firebase.auth().onAuthStateChanged(async function (user) {
       if (user) {
-        this.uid = await user.uid;
-        this.email = await user.email;
-        console.log("uid from getUID: " + this.uid);
-        
+        console.log("getUID func() called");
 
-        this.isGhost();
+        this.uid= await user.uid;
+        this.email=await user.email;
+        console.log("uid from getUID: " + this.uid + "email from getUID"+this.email);
       } else {
         console.log("signed out status");
       }
     });
+    
   }
 
 
 
-   isGhost() {
-    if (this.uid) {
-      const usersRef = this.db.collection('user').doc(this.uid);
-      console.log(usersRef);
-// usersRef.get()
-//   .subscribe((docSnapshot) => {
-//     if (docSnapshot.exists) {
-//       usersRef.snapshotChanges((doc:) => {
-//         // do stuff with the data
-//       });
-//     } else {
-//       usersRef.set({...}) // create the document
-//     }
-// });
+  async isGhost(_uid) {
+    console.log("isGhost func() called");
 
-        // this.db.collection("user").doc(this.uid).snapshotChanges().subscribe((res) => {
-        //  console.log(res);
-        // if (res) {
-        //   this.isValidUser = true;
-        //   console.log(this.uid + "is valid user");
-        // }
-        // else
-        //   this.isValidUser = false;
-        // this.router.navigate(['/signup']);
-        // console.log(this.uid + "is invalid user");
+    return await this.db.collection('user').doc(_uid).snapshotChanges();
 
-      // }
-      // )
-    }
+    // this.db.collection('user').doc(this.uid).get().subscribe((res) => {
+    //      console.log(res);
+    //     if (res) {
+    //       this.isValidUser = true;
+    //       console.log(this.uid + "is valid user");
+    //     }
+    //     else
+    //       this.isValidUser = false;
+    //     // this.router.navigate(['/signup']);
+    //     console.log(this.uid + "is invalid user");
+
+
+        
+    //   }
+    //   )
+    
   }
+
+
   login_logout() {
     console.log("버튼 클릭");
 
