@@ -2,12 +2,13 @@
 
 
     <div style="align-content: center">
-        <h2>더 많은 정보를 입력해주세요.</h2>
+        <h2>정보를 입력해주세요.</h2>
 
         <div>
-            <label>이름<br>
-                <input type="text" formControlName = "name" placeholder="이름을 입력해주세요." required>
-            </label><br><br>
+            이메일로 가입하기<br>
+            <input type="email" class="form-control" formControlName="email" placeholder="이메일@bindus.com" required>
+            <br>
+            <input type="password" class="form-control" formControlName="password" placeholder="비밀번호" required>
         </div>
         <div>
             <label>성별</label><br>
@@ -28,6 +29,6 @@
         </div>
     </div>
     <div><br>
-    <button class="button" type="submit" (click)="onSubmit()">회원가입하기</button>
+    <button class="button" type="submit" (click)="onSubmit(userInfo.value)">회원가입하기</button>
     </div>
 </form>
