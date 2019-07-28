@@ -62,6 +62,7 @@ console.log("checkedLoggedIn func() called");
 
   async isGhost(_uid) {
     console.log("isGhost func() called");
+
     return await this.db.collection('user').doc(_uid).snapshotChanges();
 
     // this.db.collection('user').doc(this.uid).get().subscribe((res) => {
