@@ -41,12 +41,12 @@ export class NavBarComponent implements OnInit {
         this.loginStatus = "로그인";
       }
     })
-console.log("checkedLoggedIn func() called");
+    console.log("checkedLoggedIn func() called");
   }
 
 
-  async getUID() {
-   return await  this.firebaseAuth.auth.currentUser.uid;
+  getUID() {
+   return this.firebaseAuth.auth.currentUser.uid;
     //  await firebase.auth().onAuthStateChanged( function (user) {
     //   if (user) {
     //     console.log("getUID func() called");
