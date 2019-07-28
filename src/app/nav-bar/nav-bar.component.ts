@@ -30,6 +30,7 @@ export class NavBarComponent implements OnInit {
     console.log(this.users);
   }
 
+  //로그인 상태면 '로그아웃' 로그아웃 상태면 '로그인'
   async checkLoggedIn() {
 
     this.firebaseAuth.authState.subscribe((gUser: any) => {
@@ -45,8 +46,9 @@ export class NavBarComponent implements OnInit {
   }
 
 
+  
   getUID() {
-   return this.firebaseAuth.auth.currentUser.uid;
+   return this.firebaseAuth.auth.currentUser.uid;//현재 로그인 되어있는 uid 반환
     //  await firebase.auth().onAuthStateChanged( function (user) {
     //   if (user) {
     //     console.log("getUID func() called");

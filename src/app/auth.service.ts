@@ -19,6 +19,7 @@ export class AuthService {
     this.user = firebaseAuth.authState;
   }
 
+  //입력받은 이메일과 비밀번호로 auth등록
   doRegister(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
@@ -40,6 +41,7 @@ export class AuthService {
     )
   }
 
+  //uid와 form이 입력되면 그 uid에 form정보들 입력
   registerUser(uid, data) {
     return new Promise<any>((resolve, reject) => {
       this.db.collection("user").doc(uid).set(data).then(res => { }, err => reject(err));

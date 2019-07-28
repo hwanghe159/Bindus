@@ -51,6 +51,7 @@ export class SignUpComponent implements OnInit {
   //  return userIdIs(uid);//returns promise
   };
 
+
   tryRegister(value){
     this.authService.doRegister(value)
     .then(res => {
@@ -66,10 +67,11 @@ export class SignUpComponent implements OnInit {
     })
   }
 
+
+  //현재 로그인 된 사용자의 uid와 이메일을 전역변수에 저장
   getUID(){
     firebase.auth().onAuthStateChanged(async function(user) {
       if (user) {
-  
         this.uid= await user.uid;
         this.email = await user.email;
         console.log("uid: "+this.uid);
@@ -83,10 +85,11 @@ export class SignUpComponent implements OnInit {
     });
   }
 
+
   onSubmit() {
-    this.userInfo.patchValue({ email: this.email });
+    this.userInfo.patchValue({ email: this.email });//form의 email부분을 전역변수 email에서 가져다 붙임
     let data = this.userInfo.value;//찾아봐
-    this.authService.registerUser(this.uid, data);
+    this.authService.registerUser(this.uid, data);//그 uid에 form정보들 입력
     console.log(data);
   }
 
