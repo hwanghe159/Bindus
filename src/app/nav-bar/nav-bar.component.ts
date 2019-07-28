@@ -23,8 +23,9 @@ export class NavBarComponent implements OnInit {
   isValidUser: boolean;
   users:any;
   async ngOnInit() {
+    
     await this.checkLoggedIn();
-     await this.getUID();
+    this.uid=await this.getUID();
     this.users=await this.isGhost(this.uid);
     console.log(this.users);
   }
@@ -33,6 +34,7 @@ export class NavBarComponent implements OnInit {
 
     this.firebaseAuth.authState.subscribe((gUser: any) => {
       if (gUser) {
+        
         this.loginStatus = "로그아웃";
         this.router.navigate(['/']);
       } else {
@@ -44,17 +46,17 @@ console.log("checkedLoggedIn func() called");
 
 
   async getUID() {
-     await firebase.auth().onAuthStateChanged(async function (user) {
-      if (user) {
-        console.log("getUID func() called");
-
-        this.uid= await user.uid;
-        this.email=await user.email;
-        console.log("uid from getUID: " + this.uid + "email from getUID"+this.email);
-      } else {
-        console.log("signed out status");
-      }
-    });
+   return await  this.firebaseAuth.auth.currentUser.uid;
+    //  await firebase.auth().onAuthStateChanged( function (user) {
+    //   if (user) {
+    //     console.log("getUID func() called");
+    //     this.uid=  user.uid;
+    //     this.email= user.email;
+    //     console.log("uid from getUID: " + this.uid + "email from getUID"+this.email);
+    //   } else {
+    //     console.log("signed out status");
+    //   }
+    // });
     
   }
 
@@ -62,7 +64,6 @@ console.log("checkedLoggedIn func() called");
 
   async isGhost(_uid) {
     console.log("isGhost func() called");
-
     return await this.db.collection('user').doc(_uid).snapshotChanges();
 
     // this.db.collection('user').doc(this.uid).get().subscribe((res) => {
