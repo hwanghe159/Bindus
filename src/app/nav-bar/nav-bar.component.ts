@@ -23,8 +23,9 @@ export class NavBarComponent implements OnInit {
   isValidUser: boolean;
   users:any;
   async ngOnInit() {
+    
     await this.checkLoggedIn();
-     await this.getUID();
+
     this.users=await this.isGhost(this.uid);
     console.log(this.users);
   }
@@ -32,24 +33,32 @@ export class NavBarComponent implements OnInit {
   async checkLoggedIn() {
 
     this.firebaseAuth.authState.subscribe((gUser: any) => {
-      if (gUser) {
+      if (gUser) {  
         this.loginStatus = "로그아웃";
         this.router.navigate(['/']);
       } else {
         this.loginStatus = "로그인";
       }
     })
-console.log("checkedLoggedIn func() called");
+      console.log("checkedLoggedIn func() called");
   }
+
+ getCurrentUser() {
+      return new Promise((resolve, reject) => {
+         const unsubscribe= firebase.auth().onAuthStateChanged(user => {
+          this.uid=user.uid;  
+          resolve(user.uid);
+         }, reject);
+      });
+    }
 
 
   async getUID() {
-     await firebase.auth().onAuthStateChanged(async function (user) {
+     await firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         console.log("getUID func() called");
-
-        this.uid= await user.uid;
-        this.email=await user.email;
+        this.uid=  user.uid;
+        this.email= user.email;
         console.log("uid from getUID: " + this.uid + "email from getUID"+this.email);
       } else {
         console.log("signed out status");
