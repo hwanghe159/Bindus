@@ -24,6 +24,10 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
         .then(res => {
+          console.log("Auth Service"+res.user.uid);    
+          value.password='';
+            this.db.collection("user").doc(res.user.uid).set(value).then(res => { }, err => reject(err));
+    
           resolve(res);
         }, err => reject(err))
     })
