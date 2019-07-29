@@ -25,48 +25,52 @@ export class NavBarComponent implements OnInit {
   async ngOnInit() {
     
     await this.checkLoggedIn();
-    this.uid=await this.getUID();
-    this.users=await this.isGhost(this.uid);
+    
     console.log(this.users);
   }
 
-  //로그인 상태면 '로그아웃' 로그아웃 상태면 '로그인'
   async checkLoggedIn() {
 
     this.firebaseAuth.authState.subscribe((gUser: any) => {
-      if (gUser) {
-        
+      if (gUser) {  
         this.loginStatus = "로그아웃";
         this.router.navigate(['/']);
       } else {
         this.loginStatus = "로그인";
       }
     })
-    console.log("checkedLoggedIn func() called");
+      console.log("checkedLoggedIn func() called");
   }
 
+//  getCurrentUser() {
+//       return new Promise((resolve, reject) => {
+//          const unsubscribe= firebase.auth().onAuthStateChanged(user => {
+//           this.uid=user.uid;  
+//           resolve(user.uid);
+//          }, reject);
+//       });
+//     }
 
-  
-  getUID() {
-   return this.firebaseAuth.auth.currentUser.uid;//현재 로그인 되어있는 uid 반환
-    //  await firebase.auth().onAuthStateChanged( function (user) {
-    //   if (user) {
-    //     console.log("getUID func() called");
-    //     this.uid=  user.uid;
-    //     this.email= user.email;
-    //     console.log("uid from getUID: " + this.uid + "email from getUID"+this.email);
-    //   } else {
-    //     console.log("signed out status");
-    //   }
-    // });
+
+  // async getUID() {
+  //    await firebase.auth().onAuthStateChanged(function (user) {
+  //     if (user) {
+  //       console.log("getUID func() called");
+  //       this.uid=  user.uid;
+  //       this.email= user.email;
+  //       console.log("uid from getUID: " + this.uid + "email from getUID"+this.email);
+  //     } else {
+  //       console.log("signed out status");
+  //     }
+  //   });
     
-  }
+  // }
 
 
 
-  async isGhost(_uid) {
-    console.log("isGhost func() called");
-    return await this.db.collection('user').doc(_uid).snapshotChanges();
+  // async isGhost(_uid) {
+  //   console.log("isGhost func() called");
+  //   return await this.db.collection('user').doc(_uid).snapshotChanges();
 
     // this.db.collection('user').doc(this.uid).get().subscribe((res) => {
     //      console.log(res);
@@ -84,7 +88,7 @@ export class NavBarComponent implements OnInit {
     //   }
     //   )
     
-  }
+  // }
 
 
   login_logout() {
