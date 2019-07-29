@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage'
+import { FormControl, FormGroup, FormsModule, FormBuilder } from "@angular/forms";
+import { BoardService } from '../board.service';
 
 @Component({
   selector: 'app-create-board',
@@ -10,10 +12,14 @@ export class CreateBoardComponent implements OnInit {
 
   file:string;
   filePath:string;
-  constructor(private storage:AngularFireStorage) { }
+  downloadURL:string;
+
+  constructor(private storage:AngularFireStorage, private formBuilder: FormBuilder, private boardService: BoardService) { 
+  }
 
   ngOnInit() {
   }
+
   async uploadFile() {
     const snapshot = await this.storage.upload(this.filePath, this.file)
     return await snapshot.ref.getDownloadURL();
@@ -22,30 +28,31 @@ export class CreateBoardComponent implements OnInit {
 
 
   updateFile(event) {
-    this.file = event.target.files[0];
+    this.file = event.target.files.length
+    console.log(this.file);
   }
 
 
 
-//   async onSubmit() {
-//     this.filePath = '/review/' + 'pic' + Math.floor(Math.random() * 1000000);
-//     this.reviewService.form.patchValue({ imgsrc: this.filePath });
-//     this.downloadURL = await this.uploadFile();
+  async onSubmit() {
+    this.downloadURL = await this.uploadFile();
+    console.log(this.downloadURL);
  
-//     this.reviewService.form.patchValue({ imgurl: this.downloadURL });
+    // this.boardService.form.patchValue({ imgurl: this.downloadURL });
 
-//     this.reviewService.form.patchValue({ seatid:
-//         this.reviewService.form.controls['loc'].value
-//         + '_' + this.reviewService.form.controls['sec'].value
-//         + '_' + this.reviewService.form.controls['row'].value
-//         + '_' + this.reviewService.form.controls['num'].value});
+    // this.boardService.form.patchValue({ seatid:
+    //     this.boardService.form.controls['loc'].value
+    //     + '_' + this.reviewService.form.controls['sec'].value
+    //     + '_' + this.reviewService.form.controls['row'].value
+    //     + '_' + this.reviewService.form.controls['num'].value});
 
-//     // uid 추가
-//     this.reviewService.form.patchValue({ uid: this.uid });
+    // // uid 추가
+    // this.reviewService.form.patchValue({ uid: this.uid });
 
-//     let data = this.reviewService.form.value;
+    // let data = this.reviewService.form.value;
 
-//     this.reviewService.createReview(data).then(res => {});
+    // this.reviewService.createReview(data).then(res => {});
 
 
+ }
 }

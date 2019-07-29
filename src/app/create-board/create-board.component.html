@@ -9,8 +9,7 @@
         <textarea class="form-control" rows="10" placeholder="작성해주세요." formControlName="brdContents"></textarea>
     </div>
     <div class="custom-file">
-        <input #img type="file" class="custom-file-input" id="customFile" (change)="updateFile($event)"
-            accept=".png,.jpg">
+        <input #img type="file" class="custom-file-input" id="customFile" (change)="updateFile($event)" accept=".png,.jpg" multiple>
         <!-- <label class="custom-file-label" for="customFile" id="file_route">{{img.value}}</label> -->
     </div>
 
