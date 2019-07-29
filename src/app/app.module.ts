@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { environment } from "src/environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
-import { AngularFireStorageModule } from '@angular/fire/storage'
+import { AngularFireStorageModule,AngularFireStorage } from '@angular/fire/storage'
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component'; 
