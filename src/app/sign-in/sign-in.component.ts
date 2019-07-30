@@ -26,6 +26,7 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
   }
   
+  //입력받은 이메일과 비밀번호로 auth등록을 시도함
   tryRegister(value){
     this.authService.doRegister(value)
     .then(res => {
