@@ -33,7 +33,9 @@ export class NavBarComponent implements OnInit {
 
     this.firebaseAuth.authState.subscribe((gUser: any) => {
       if (gUser) {  
+        
         this.loginStatus = "로그아웃";
+
         this.router.navigate(['/']);
       } else {
         this.loginStatus = "로그인";

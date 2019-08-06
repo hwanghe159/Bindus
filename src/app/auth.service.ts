@@ -14,9 +14,11 @@ export class AuthService {
   form = new FormGroup({ email: new FormControl(' '), password: new FormControl(' ') });
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
-
+  uid: string;
+  email: string;
   constructor(private firebaseAuth: AngularFireAuth, private router: Router, private db: AngularFirestore) {
     this.user = firebaseAuth.authState;
+
   }
 
   //입력받은 이메일과 비밀번호로 auth등록
@@ -24,10 +26,10 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
         .then(res => {
-          console.log("Auth Service"+res.user.uid);    
-          value.password='';
-            this.db.collection("user").doc(res.user.uid).set(value).then(res => { }, err => reject(err));
-    
+          console.log("Auth Service" + res.user.uid);
+          value.password = '';
+          this.db.collection("user").doc(res.user.uid).set(value).then(res => { }, err => reject(err));
+
           resolve(res);
         }, err => reject(err))
     })
@@ -70,4 +72,29 @@ export class AuthService {
 
 
 
+ async getCurrentUserUID() {
+   return await this.firebaseAuth.auth.currentUser.uid;
+  }
+
+  async getCurrentUserEmail() {
+    return await this.firebaseAuth.auth.currentUser.email;
+  }
+
+  
+  async getCurrrentUserName()
+  {
+    let _uid=await this.getCurrentUserUID();
+    this.db.collection('user').doc(_uid).ref.get().then(
+      function(doc){
+        if(doc.exists)
+        {console.log(doc.data());}
+        else
+        {}
+      }
+    )
+    
+
+
+
+}
 }

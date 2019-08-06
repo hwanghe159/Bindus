@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage'
 import { FormControl, FormGroup, FormsModule, FormBuilder } from "@angular/forms";
 import { BoardService } from '../board.service';
+import { AuthService } from '../auth.service';
+import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-create-board',
@@ -14,10 +16,35 @@ export class CreateBoardComponent implements OnInit {
   filePath:string;
   downloadURL:string;
 
-  constructor(private storage:AngularFireStorage, private formBuilder: FormBuilder, private boardService: BoardService) { 
+  constructor(private db : AngularFirestore, private storage:AngularFireStorage, private formBuilder: FormBuilder, private boardService: BoardService, private authService:AuthService) { 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    let uid = await this.authService.getCurrentUserUID();
+    console.log("auth service.getCurrentUID() returns"+uid);
+    let email = await this.authService.getCurrentUserEmail();
+    console.log("auth service.getCurrentUID() returns"+email);
+
+      this.db.collection('user').doc(uid).ref.get().then(
+        function(doc){
+          if(doc.exists)
+          {console.log(doc.data());}
+          else
+          {}
+        }
+      )
+      
+    // this.authService.getCurrrentUserName().then()=>{
+
+
+    //   res.subscribe((ref)=>{console.log(ref[5]);});
+    //   console.log(res);
+    //   console.log(res[5]);
+    // })
+    
+      
+   
+
   }
 
   async uploadFile() {

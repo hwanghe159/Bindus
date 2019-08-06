@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, FormsModule } from "@angular/forms";
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoardService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFirestore) { }
 
   imgsrc: string;
   
@@ -26,11 +26,11 @@ export class BoardService {
   })
 
 
-  createReview(data) {
-    return new Promise<any>((resolve, reject) =>{
-        this.db.list('/brd').push(data).then(res => {}, err => reject(err));
-    });
-  }
+  // createReview(data) {
+  //   return new Promise<any>((resolve, reject) =>{
+  //       this.db.list('/brd').push(data).then(res => {}, err => reject(err));
+  //   });
+  // }
   
   
 }

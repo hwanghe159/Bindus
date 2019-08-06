@@ -18,6 +18,10 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CreateBoardComponent } from './create-board/create-board.component';
 import { SignUp2Component } from './sign-up2/sign-up2.component';
 import { MainComponent } from './main/main.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -39,7 +43,11 @@ import { MainComponent } from './main/main.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
+    NgbModule
 
 
   ],
