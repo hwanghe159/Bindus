@@ -22,6 +22,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CreateBoardComponent } from './create-board/create-board.component';
 import { SignUp2Component } from './sign-up2/sign-up2.component';
 import { MainComponent } from './main/main.component';
+import { BoardComponent } from './board/board.component';
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { MainComponent } from './main/main.component';
     NavBarComponent,
     CreateBoardComponent,
     SignUp2Component,
-    MainComponent
+    MainComponent,
+    BoardComponent,
+    JwPaginationComponent
   ],
   imports: [
     BrowserModule,
