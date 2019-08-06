@@ -24,6 +24,7 @@ import { SignUp2Component } from './sign-up2/sign-up2.component';
 import { MainComponent } from './main/main.component';
 import { BoardComponent } from './board/board.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
+import { DetailComponent } from './detail/detail.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
     SignUp2Component,
     MainComponent,
     BoardComponent,
-    JwPaginationComponent
+    JwPaginationComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,
