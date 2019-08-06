@@ -8,6 +8,10 @@ import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestor
 import { Observable, of, from} from 'rxjs';
 import { AuthService } from '../auth.service';
 import { map } from 'rxjs/operators';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireStorage } from '@angular/fire/storage';
+
+
 
 @Component({
   selector: 'app-nav-bar',

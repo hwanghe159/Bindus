@@ -14,6 +14,7 @@ export class AuthService {
   form = new FormGroup({ email: new FormControl(' '), password: new FormControl(' ') });
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
+  name: string;
 
   constructor(private firebaseAuth: AngularFireAuth, private router: Router, private db: AngularFirestore) {
     this.user = firebaseAuth.authState;
@@ -65,9 +66,44 @@ export class AuthService {
         var errorCode = error.code;
         var errorMessage = error.message;
       });
-
   }
 
+  //로그인되어 있는 uid반환
+  async getCurrentUserUID() {
+    return await this.firebaseAuth.auth.currentUser.uid;
+   }
+ 
+  
+  //로그인되어 있는 email반환
+  async getCurrentUserEmail() {
+    return await this.firebaseAuth.auth.currentUser.email;
+  }
 
+  //로그인되어 있는 uid의 이름 수정
+  async getCurrentUserName() {
+    let uid = this.firebaseAuth.auth.currentUser.uid;
+    await this.db.collection('user').doc(uid).ref.get().then(
+      function (doc) {
+        if (doc.exists) {
+          console.log(doc.data());
+          this.name = doc.data().name;
+          console.log(this.name);
+        }
+        else {
+          console.log("No such document!");
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+
+  }
+  // let name = this.db.collection('user').doc(uid).ref.get().then(
+  //   function (doc) {
+  //     if (doc.exists) {
+  //       console.log(doc.data());
+  //       return name;
+  //     }
+  //   }
+  // )
 
 }

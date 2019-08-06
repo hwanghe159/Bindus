@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage'
 import { FormControl, FormGroup, FormsModule, FormBuilder } from "@angular/forms";
 import { BoardService } from '../board.service';
+import { AuthService } from  '../auth.service';
+import { throwIfEmpty } from 'rxjs/operators';
+import { stringify } from '@angular/compiler/src/util';
+import { Router } from '@angular/router';
+import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-create-board',
@@ -10,33 +16,91 @@ import { BoardService } from '../board.service';
 })
 export class CreateBoardComponent implements OnInit {
 
-  file:string;
+  files:Array<any>;
   filePath:string;
-  downloadURL:string;
+  URLs:Array<string>;
+  URL:string;
+  cnt:number = 0;
 
-  constructor(private storage:AngularFireStorage, private formBuilder: FormBuilder, private boardService: BoardService) { 
+  constructor(private storage:AngularFireStorage, private formBuilder: FormBuilder, private boardService: BoardService, 
+    private authService: AuthService, private router: Router, private db: AngularFirestore) { 
   }
 
   ngOnInit() {
   }
 
-  async uploadFile() {
-    const snapshot = await this.storage.upload(this.filePath, this.file)
-    return await snapshot.ref.getDownloadURL();
-  }
+  // //파일 1개에 대하여 DB에 올리고 URL 반환
+  // async uploadFile(i: number) {
+  //     const snapshot = await this.storage.upload(this.filePaths[i], this.files[i])
+  //     return await snapshot.ref.getDownloadURL();
+  // }
 
 
-
+  //파일첨부 상태가 변하면 실행됨
   updateFile(event) {
-    this.file = event.target.files.length
-    console.log(this.file);
+    this.files = event.target.files;
+    this.cnt = event.target.files.length;
+    //this.boardService.form.patchValue({brdPicCnt:this.cnt});
+    console.log(this.files);
   }
 
 
 
   async onSubmit() {
-    this.downloadURL = await this.uploadFile();
-    console.log(this.downloadURL);
+    this.URLs = [];
+    
+    for (let i = 0; i < this.cnt; i++) {
+      this.filePath = '/brd/' + 'pic' + Math.floor(Math.random() * 1000000);
+      const snapshot = await this.storage.upload(this.filePath, this.files[i])
+      this.URL = await snapshot.ref.getDownloadURL();
+      this.URLs.push(this.URL);
+    }
+
+    let _brdTitle = this.boardService.form.controls['brdTitle'].value;
+    let _brdContents = this.boardService.form.controls['brdContents'].value;
+
+    this.boardService.form.patchValue({ brdTitle: _brdTitle });
+    this.boardService.form.patchValue({ brdContents: _brdContents });
+
+
+    this.boardService.form.patchValue({ brdPicCnt: this.cnt });
+    if (this.cnt >= 1) {
+      this.boardService.form.patchValue({ brdPic1: this.URLs[0] });
+      if (this.cnt >= 2) {
+        this.boardService.form.patchValue({ brdPic2: this.URLs[1] });
+        if (this.cnt >= 3) {
+          this.boardService.form.patchValue({ brdPic3: this.URLs[2] });
+        }
+      }
+    }
+
+
+    // this.authService.getCurrentUserUID().then(res=>{
+    //   UID = res;
+    // })
+    // .then()
+    // https://joshua1988.github.io/web-development/javascript/promise-for-beginners/ 이거 참고하면서 따라해보기
+
+    let UID = await this.authService.getCurrentUserUID();
+    let email = await this.authService.getCurrentUserEmail();
+    //await this.authService.getCurrentUserName();
+    //let name = await this.authService.name;
+    console.log("UID: "+UID+", email: "+email+", name: "+name);
+    this.boardService.form.patchValue({ UID: UID });
+    this.boardService.form.patchValue({ email: email });
+    //this.boardService.form.patchValue({ name: name });
+
+
+    let time = firebase.firestore.Timestamp.now();
+    this.boardService.form.patchValue({ brdTime: time });
+
+
+    // for (let i = 0; i < this.cnt; i++) {
+    //   console.log("for문 " + i + "번째 탐");
+    //   this.uploadFile(i).then(res => {
+    //     this.URLs.push(res);})
+    //   console.log("URLs : " + this.URLs);
+    // }
  
     // this.boardService.form.patchValue({ imgurl: this.downloadURL });
 
@@ -49,10 +113,11 @@ export class CreateBoardComponent implements OnInit {
     // // uid 추가
     // this.reviewService.form.patchValue({ uid: this.uid });
 
-    // let data = this.reviewService.form.value;
+    let data = this.boardService.form.value;
 
-    // this.reviewService.createReview(data).then(res => {});
+    this.boardService.createBoard(data).then(res => {});
 
+    this.router.navigate(['/']);
 
  }
 }
