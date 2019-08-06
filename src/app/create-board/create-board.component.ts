@@ -26,7 +26,32 @@ export class CreateBoardComponent implements OnInit {
     private authService: AuthService, private router: Router, private db: AngularFirestore) { 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    let uid = await this.authService.getCurrentUserUID();
+    console.log("auth service.getCurrentUID() returns"+uid);
+    let email = await this.authService.getCurrentUserEmail();
+    console.log("auth service.getCurrentUID() returns"+email);
+
+      // this.db.collection('user').doc(uid).ref.get().then(
+      //   function(doc){
+      //     if(doc.exists)
+      //     {console.log(doc.data());}
+      //     else
+      //     {}
+      //   }
+      // )
+      
+    // this.authService.getCurrrentUserName().then()=>{
+
+
+    //   res.subscribe((ref)=>{console.log(ref[5]);});
+    //   console.log(res);
+    //   console.log(res[5]);
+    // })
+    
+      
+   
+
   }
 
   // //파일 1개에 대하여 DB에 올리고 URL 반환

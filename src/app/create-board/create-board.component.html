@@ -1,3 +1,4 @@
+<!--
 <form [formGroup]="this.boardService.form" novalidate>
     <div>
         <input type="text" class="form-control" formControlName="brdTitle" placeholder="Please enter title" required>
@@ -10,16 +11,44 @@
     </div>
     <div class="custom-file">
         <input #img type="file" class="custom-file-input" id="customFile" (change)="updateFile($event)" accept=".png,.jpg" multiple>
-        <!-- <label class="custom-file-label" for="customFile" id="file_route">{{img.value}}</label> -->
+         <label class="custom-file-label" for="customFile" id="file_route">{{img.value}}</label> 
     </div>
+-->
+
+<main role="main" class="container">
+    <br>
+    <br>
+    <br>
+    <div class="py-5 text-center">
+            <br>
+            <p class="location-subtitle">게시물을 입력해주세요.</p>
+        </div>
+    
+
+    <form [formGroup]="this.boardService.form">
+        <div>
+            <input type="text" class="form-control" formControlName="brdTitle" placeholder="Please enter title" required>
+            <br>
+        </div>
 
 
-    <br><br>
+        <div>
+            <textarea class="form-control" rows="10" placeholder="작성해주세요." formControlName="brdContents"></textarea>
+        </div>
+        <br>
+        <div class="custom-file">
+            <input #img type="file" class="custom-file-input" id="customFile" (change)="updateFile($event)"
+                accept=".png,.jpg" multiple>
+            <label class="custom-file-label" for="customFile" id="file_route">{{img.value}}</label>
+        </div>
+<br>
+<br>
+     <!-- 제출 버튼 -->
+        <div class="submit-button">
+            <button type="submit" class="btn btn-secondary btn-block" (click)="onSubmit()">SUBMIT</button>
+        </div>
 
-    <!-- 제출 버튼 -->
-    <div class="submit-button">
-        <button type="submit" class="btn btn-secondary btn-block" (click)="onSubmit()">SUBMIT</button>
-    </div>
-
-
-</form>
+<br>
+<br>
+    </form>
+</main>
