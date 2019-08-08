@@ -14,15 +14,11 @@ export class BoardComponent implements OnInit {
   constructor(private db: AngularFirestore) { }
 
   ngOnInit() {
-    this.db.collection("brd").get().toPromise().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        this.items.push(doc.data());
-        console.log(`${doc.id} => ${doc.data()}`);
-      });
-    });
+    
+    this.getData();
+
     console.log("POI is "+this.pageOfItems);
 
-    //  this.getData();
     //{id: 1, name: "Item 1"}, {id: 2, name: "Item 2"}...
     // this.getData();
     // this.items = Array(150).fill(0).map((x, i) => ({ id: (i + 1), name: `Item ${i + 1}` }));

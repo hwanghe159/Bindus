@@ -1,6 +1,6 @@
 <div class="card text-center m-3">
     <div class="card-body">
-        <div *ngFor="let item of items">
+        <div *ngFor="let item of pageOfItems">
             <a routerLink="/board/{{item.id}}">{{item.brdTitle}}
             </a>
         </div>
