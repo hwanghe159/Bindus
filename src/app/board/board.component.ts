@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-board',
@@ -6,19 +7,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
-  
-  items = [];
+
+  items =[];
   pageOfItems: Array<any>;
 
-  constructor() { }
+  constructor(private db: AngularFirestore) { }
 
   ngOnInit() {
+    this.db.collection("brd").get().toPromise().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.items.push(doc.data());
+        console.log(`${doc.id} => ${doc.data()}`);
+      });
+    });
+    console.log("POI is "+this.pageOfItems);
+
+    //  this.getData();
     //{id: 1, name: "Item 1"}, {id: 2, name: "Item 2"}...
-    this.items = Array(150).fill(0).map((x, i) => ({ id: (i+1), name: `Item ${i + 1}`}));
+    // this.getData();
+    // this.items = Array(150).fill(0).map((x, i) => ({ id: (i + 1), name: `Item ${i + 1}` }));
   }
 
   onChangePage(pageOfItems: Array<any>) {
     this.pageOfItems = pageOfItems;
   }
 
+  getData() {
+    this.db.collection("brd").get().toPromise().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.items.push(doc.data());
+        console.log(`${doc.id} => ${doc.data()}`);
+      });
+    });
+
+  }
 }

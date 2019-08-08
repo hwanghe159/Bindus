@@ -1,11 +1,11 @@
 <div class="card text-center m-3">
     <div class="card-body">
-        <div *ngFor="let item of pageOfItems">
-            <a routerLink="/board/{{item.id}}">{{item.name}}
+        <div *ngFor="let item of items">
+            <a routerLink="/board/{{item.id}}">{{item.brdTitle}}
             </a>
         </div>
     </div>
     <div class="card-footer pb-0 pt-3">
-        <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+        <jw-pagination [items]="items"  (changePage)="onChangePage($event)"></jw-pagination>
     </div>
 </div>
