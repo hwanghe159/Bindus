@@ -31,7 +31,7 @@ export class CreateBoardComponent implements OnInit {
     console.log("auth service.getCurrentUID() returns"+uid);
     let email = await this.authService.getCurrentUserEmail();
     console.log("auth service.getCurrentUID() returns"+email);
-
+this.authService.getCurrrentUserName();
       // this.db.collection('user').doc(uid).ref.get().then(
       //   function(doc){
       //     if(doc.exists)
