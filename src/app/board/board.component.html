@@ -10,10 +10,11 @@
     </div>
 </div> -->
 
-<h1>  ngx-pagination</h1>
+<h1> ngx-pagination</h1>
 <ul>
-    <li *ngFor="let item of itmes | paginate: config"> 
-      {{item.brdTitle}} </li>
-  </ul>
-             
-  <pagination-controls id="random" (pageChange)="p = $event"></pagination-controls>
+    <li *ngFor="let item of items | paginate: config">
+        {{item.brdTitle}}
+    </li>
+</ul>
+
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

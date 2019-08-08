@@ -72,9 +72,9 @@ export class AuthService {
   //로그인되어 있는 uid반환
   async getCurrentUserUID() {
     return await this.firebaseAuth.auth.currentUser.uid;
-   }
- 
-  
+  }
+
+
   //로그인되어 있는 email반환
   async getCurrentUserEmail() {
     return await this.firebaseAuth.auth.currentUser.email;
@@ -83,12 +83,15 @@ export class AuthService {
   //로그인되어 있는 uid의 이름 수정
   async getCurrentUserName() {
     let uid = this.firebaseAuth.auth.currentUser.uid;
-    await this.db.collection('user').doc(uid).ref.get().then(
+    var data;
+    this.db.collection('user').doc(uid).ref.get().then(
       function (doc) {
         if (doc.exists) {
-          console.log(doc.data());
-          this.name = doc.data().name;
-          console.log(this.name);
+          console.log(typeof(doc.data()));
+          data = doc.data();
+          
+          //this.name = doc.data().name;
+          //console.log(this.name);
         }
         else {
           console.log("No such document!");
@@ -96,7 +99,7 @@ export class AuthService {
       }).catch(function (error) {
         console.log("Error getting document:", error);
       });
-
+    return await data;
   }
   // let name = this.db.collection('user').doc(uid).ref.get().then(
   //   function (doc) {
@@ -106,17 +109,14 @@ export class AuthService {
   //     }
   //   }
   // )
-  
-  async getCurrrentUserName()
-  {
-    let _uid=await this.getCurrentUserUID();
-    this.db.collection('user').doc(_uid).ref.get().then(
-      function(doc){
-        if(doc.exists)
-        {console.log(doc.data());}
-        else
-        {}
-      }
-    )
-}
+
+  // async getCurrrentUserName() {
+  //   let _uid = await this.getCurrentUserUID();
+  //   this.db.collection('user').doc(_uid).ref.get().then(
+  //     function (doc) {
+  //       if (doc.exists) { console.log(doc.data()); }
+  //       else { }
+  //     }
+  //   )
+  // }
 }

@@ -21,6 +21,8 @@ export class CreateBoardComponent implements OnInit {
   URLs:Array<string>;
   URL:string;
   cnt:number = 0;
+  user:any;
+  
 
   constructor(private storage:AngularFireStorage, private formBuilder: FormBuilder, private boardService: BoardService, 
     private authService: AuthService, private router: Router, private db: AngularFirestore) { 
@@ -30,7 +32,10 @@ export class CreateBoardComponent implements OnInit {
     let uid = await this.authService.getCurrentUserUID();
     console.log("auth service.getCurrentUID() returns"+uid);
     let email = await this.authService.getCurrentUserEmail();
-    console.log("auth service.getCurrentUID() returns"+email);
+    console.log("auth service.getCurrentEmail() returns"+email);
+    let name = await this.authService.getCurrentUserName();
+    console.log("name : "+name[5]); 
+
 
       // this.db.collection('user').doc(uid).ref.get().then(
       //   function(doc){
@@ -109,11 +114,11 @@ export class CreateBoardComponent implements OnInit {
     let UID = await this.authService.getCurrentUserUID();
     let email = await this.authService.getCurrentUserEmail();
     //await this.authService.getCurrentUserName();
-    //let name = await this.authService.name;
+    let name = await this.authService.getCurrentUserName();
     console.log("UID: "+UID+", email: "+email+", name: "+name);
     this.boardService.form.patchValue({ UID: UID });
     this.boardService.form.patchValue({ email: email });
-    //this.boardService.form.patchValue({ name: name });
+    this.boardService.form.patchValue({ name: name });
 
 
     let time = firebase.firestore.Timestamp.now();
