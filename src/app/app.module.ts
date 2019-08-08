@@ -23,9 +23,10 @@ import { CreateBoardComponent } from './create-board/create-board.component';
 import { SignUp2Component } from './sign-up2/sign-up2.component';
 import { MainComponent } from './main/main.component';
 import { BoardComponent } from './board/board.component';
-// import { JwPaginationComponent } from 'jw-angular-pagination';
+//import { JwPaginationComponent } from 'jw-angular-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { DetailComponent } from './detail/detail.component';
-import {NgxPaginationModule} from 'ngx-pagination'; 
+
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     SignUp2Component,
     MainComponent,
     BoardComponent,
-    // JwPaginationComponent,
+    //JwPaginationComponent,
     DetailComponent
   ],
   imports: [

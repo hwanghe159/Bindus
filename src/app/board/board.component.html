@@ -6,14 +6,15 @@
         </div>
     </div>
     <div class="card-footer pb-0 pt-3">
-        <jw-pagination [items]="items"  (changePage)="onChangePage($event)"></jw-pagination>
+        <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
     </div>
 </div> -->
 
-<h1>  ngx-pagination</h1>
+<h1> ngx-pagination</h1>
 <ul>
-    <li *ngFor="let item of items | paginate: config"> 
-      {{item.brdTitle}} </li>
-  </ul>
-             
-  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+    <li *ngFor="let item of items | paginate: config">
+        {{item.brdTitle}}
+    </li>
+</ul>
+
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

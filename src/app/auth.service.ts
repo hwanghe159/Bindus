@@ -72,32 +72,35 @@ export class AuthService {
   //로그인되어 있는 uid반환
   async getCurrentUserUID() {
     return await this.firebaseAuth.auth.currentUser.uid;
-   }
- 
-  
+  }
+
+
   //로그인되어 있는 email반환
   async getCurrentUserEmail() {
     return await this.firebaseAuth.auth.currentUser.email;
   }
 
   //로그인되어 있는 uid의 이름 수정
-  // async getCurrentUserName() {
-  //   let uid = this.firebaseAuth.auth.currentUser.uid;
-  //   await this.db.collection('user').doc(uid).ref.get().then(
-  //     function (doc) {
-  //       if (doc.exists) {
-  //         console.log(doc.data());
-  //         this.name = doc.data().name;
-  //         console.log(this.name);
-  //       }
-  //       else {
-  //         console.log("No such document!");
-  //       }
-  //     }).catch(function (error) {
-  //       console.log("Error getting document:", error);
-  //     });
-
-  // }
+  async getCurrentUserName() {
+    let uid = this.firebaseAuth.auth.currentUser.uid;
+    var data;
+    this.db.collection('user').doc(uid).ref.get().then(
+      function (doc) {
+        if (doc.exists) {
+          console.log(typeof(doc.data()));
+          data = doc.data();
+          
+          //this.name = doc.data().name;
+          //console.log(this.name);
+        }
+        else {
+          console.log("No such document!");
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+    return await data;
+  }
   // let name = this.db.collection('user').doc(uid).ref.get().then(
   //   function (doc) {
   //     if (doc.exists) {
@@ -106,26 +109,14 @@ export class AuthService {
   //     }
   //   }
   // )
-  
-  async getCurrrentUserName()
-  {
-    let _uid=await this.getCurrentUserUID();
-    var data= await this.db.collection("user").doc(_uid);
-    await data.ref.get().then(
-     (doc)=>{
 
-      console.log("doc.data is " + doc.data());
-     }
-   )
-    // this.db.collection("user").get().toPromise().then((querySnapshot) => {
-    //   querySnapshot.forEach((doc) => {
-    //    if(doc.id ==_uid)
-    //    {
-    //         console.log(doc.data());
-    //    }
-    //     console.log(`${doc.id} => ${doc.data()}`);
-    //   });
-    // });
-  }
-
+  // async getCurrrentUserName() {
+  //   let _uid = await this.getCurrentUserUID();
+  //   this.db.collection('user').doc(_uid).ref.get().then(
+  //     function (doc) {
+  //       if (doc.exists) { console.log(doc.data()); }
+  //       else { }
+  //     }
+  //   )
+  // }
 }
