@@ -22,7 +22,7 @@ export class CreateBoardComponent implements OnInit {
   URL:string;
   cnt:number = 0;
   user:any;
-  
+  userInfo:Object;
 
   constructor(private storage:AngularFireStorage, private formBuilder: FormBuilder, private boardService: BoardService, 
     private authService: AuthService, private router: Router, private db: AngularFirestore) { 
@@ -33,8 +33,8 @@ export class CreateBoardComponent implements OnInit {
     console.log("auth service.getCurrentUID() returns"+uid);
     let email = await this.authService.getCurrentUserEmail();
     console.log("auth service.getCurrentEmail() returns"+email);
-    let name = await this.authService.getCurrentUserName();
-    console.log("name : "+name[5]); 
+    this.user = await this.authService.getCurrentUserName();
+    console.log("this.user : "+this.user); 
 
 
       // this.db.collection('user').doc(uid).ref.get().then(
@@ -91,6 +91,7 @@ export class CreateBoardComponent implements OnInit {
 
     this.boardService.form.patchValue({ brdTitle: _brdTitle });
     this.boardService.form.patchValue({ brdContents: _brdContents });
+    this.boardService.form.patchValue({ name: this.user });
 
 
     this.boardService.form.patchValue({ brdPicCnt: this.cnt });

@@ -16,6 +16,7 @@ export class AuthService {
   private userDetails: firebase.User = null;
   uid: string;
   email: string;
+  data:any;
   constructor(private firebaseAuth: AngularFireAuth, private router: Router, private db: AngularFirestore) {
     this.user = firebaseAuth.authState;
 
@@ -80,15 +81,14 @@ export class AuthService {
     return await this.firebaseAuth.auth.currentUser.email;
   }
 
-  //로그인되어 있는 uid의 이름 수정
+  //로그인되어 있는 uid의 이름 
   async getCurrentUserName() {
-    let uid = this.firebaseAuth.auth.currentUser.uid;
-    var data;
-    this.db.collection('user').doc(uid).ref.get().then(
+    let uid = await this.firebaseAuth.auth.currentUser.uid;
+    return this.db.collection('user').doc(uid).ref.get().then(
       function (doc) {
         if (doc.exists) {
-          console.log(typeof(doc.data()));
-          data = doc.data();
+          console.log(doc.data());
+          return doc.get("name");
           
           //this.name = doc.data().name;
           //console.log(this.name);
@@ -99,7 +99,7 @@ export class AuthService {
       }).catch(function (error) {
         console.log("Error getting document:", error);
       });
-    return await data;
+
   }
   // let name = this.db.collection('user').doc(uid).ref.get().then(
   //   function (doc) {
@@ -119,4 +119,6 @@ export class AuthService {
   //     }
   //   )
   // }
+
+ 
 }
