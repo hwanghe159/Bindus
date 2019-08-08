@@ -19,12 +19,13 @@ export class BoardComponent implements OnInit {
   constructor(private db: AngularFirestore) { 
 
 
-      
   this.config = {
     itemsPerPage: 5,
     currentPage: 1,
     totalItems: this.cnt
   };
+
+  
   }
 
   ngOnInit() {
@@ -44,11 +45,13 @@ export class BoardComponent implements OnInit {
   }
 
 
-  
-  onChangePage(pageOfItems: Array<any>) {
-    this.pageOfItems = pageOfItems;
+
+
+  pageChanged(event){
+    this.config.currentPage = event;
   }
 
+  
   getData() {
 
     this.db.collection("brd").get().toPromise().then((querySnapshot) => {
