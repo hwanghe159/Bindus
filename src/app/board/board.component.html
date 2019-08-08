@@ -1,20 +1,23 @@
-<!-- <div class="card text-center m-3">
-    <div class="card-body">
-        <div *ngFor="let item of items">
-            <a routerLink="/board">{{item.brdTitle}}
-            </a>
-        </div>
-    </div>
-    <div class="card-footer pb-0 pt-3">
-        <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
-    </div>
-</div> -->
 
-<h1> ngx-pagination</h1>
-<ul>
-    <li *ngFor="let item of items | paginate: config">
-        {{item.brdTitle}}
-    </li>
-</ul>
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <td style="padding-left:0px; padding-right:0px; text-align:center" >No.</td>
+            <td>Name</td>
+            <td  >Title</td>
+            <!-- <td>Salary</td> -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items | paginate: config; let idx=index" >
+            <td style="padding-left:0px; padding-right:0px; text-align:center">{{idx+1}}</td>
+            <td>{{item.name}}</td>
+            <td >{{item.brdTitle}}</td>
+            <!-- <td>{{emp.employee_age}}</td> -->
+        </tr>
+    </tbody>
+</table>
+
+
 
 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

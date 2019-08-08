@@ -30,7 +30,6 @@ export class BoardService {
     return new Promise<any>((resolve, reject) =>{
         this.db.collection('/brd').add(data);
         
-        
         //set(data).then(res => {}, err => reject(err));
     });
   }

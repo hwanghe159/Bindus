@@ -29,6 +29,7 @@ export class CreateBoardComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.boardService.form.reset();
     let uid = await this.authService.getCurrentUserUID();
     console.log("auth service.getCurrentUID() returns"+uid);
     let email = await this.authService.getCurrentUserEmail();
@@ -147,7 +148,6 @@ export class CreateBoardComponent implements OnInit {
     let data = this.boardService.form.value;
 
     this.boardService.createBoard(data).then(res => {});
-
     this.router.navigate(['/']);
 
  }
