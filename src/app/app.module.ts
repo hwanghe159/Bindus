@@ -26,6 +26,7 @@ import { BoardComponent } from './board/board.component';
 //import { JwPaginationComponent } from 'jw-angular-pagination';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DetailComponent } from './detail/detail.component';
+import { BoardService } from './board.service';
 
 
 @NgModule({
@@ -59,7 +60,7 @@ import { DetailComponent } from './detail/detail.component';
   ],
   providers: [
     AuthService,
-    BoardComponent
+    BoardService
   ],
   bootstrap: [AppComponent]
 })
