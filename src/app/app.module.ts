@@ -57,7 +57,10 @@ import { DetailComponent } from './detail/detail.component';
     NgbModule,
     NgxPaginationModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    BoardComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,6 +12,7 @@ export class BoardService {
   imgsrc: string;
   
   form = new FormGroup({
+    brdId: new FormControl(''),
     UID: new FormControl(''),
     brdContents: new FormControl(''),
     brdFlag: new FormControl(1),
@@ -33,6 +34,8 @@ export class BoardService {
         //set(data).then(res => {}, err => reject(err));
     });
   }
+
+  
   // createReview(data) {
   //   return new Promise<any>((resolve, reject) =>{
   //       this.db.list('/brd').push(data).then(res => {}, err => reject(err));

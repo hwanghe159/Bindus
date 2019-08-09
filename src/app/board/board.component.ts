@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
 import { NgxPaginationModule } from 'ngx-pagination';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -31,7 +32,9 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
 
     this.getData();
+    
 
+  
 
     //{id: 1, name: "Item 1"}, {id: 2, name: "Item 2"}...
     // this.getData();
@@ -46,19 +49,34 @@ export class BoardComponent implements OnInit {
   }
 
 
+  //모든 게시물을 items배열에 저장
   getData() {
-
+    this.items = [];
     this.db.collection("brd").get().toPromise().then((querySnapshot) => {
       this.cnt = querySnapshot.docs.length;
       querySnapshot.query.orderBy("brdTime","desc").get().then((data) => {
         data.forEach((doc=>{
-          this.items.push(doc.data());
-          console.log(`${doc.id} => ${doc.data()}`);}))
-        
+          this.items.push(doc);
+          }))
       });
     });
   }
 
+  getItems() {
+    console.log("this.items = "+this.items);
+    return of(this.items);
+  }
+  // getData() {
 
+  //   this.db.collection("brd").get().toPromise().then((querySnapshot) => {
+  //     this.cnt = querySnapshot.docs.length;
+  //     querySnapshot.query.orderBy("brdTime","desc").get().then((data) => {
+  //       data.forEach((doc=>{
+  //         this.items.push(doc.data());
+  //         console.log(`${doc.id} => ${doc.data()}`);}))
+        
+  //     });
+  //   });
+  // }
 
 }

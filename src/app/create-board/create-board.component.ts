@@ -87,12 +87,15 @@ export class CreateBoardComponent implements OnInit {
       this.URLs.push(this.URL);
     }
 
+    let _brdId = this.db.createId().substring(0,6);
     let _brdTitle = this.boardService.form.controls['brdTitle'].value;
     let _brdContents = this.boardService.form.controls['brdContents'].value;
 
+    this.boardService.form.patchValue({ brdId: _brdId });
     this.boardService.form.patchValue({ brdTitle: _brdTitle });
     this.boardService.form.patchValue({ brdContents: _brdContents });
     this.boardService.form.patchValue({ name: this.user });
+    this.boardService.form.patchValue({ brdFlag: 1 });
 
 
     this.boardService.form.patchValue({ brdPicCnt: this.cnt });
