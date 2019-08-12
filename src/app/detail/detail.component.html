@@ -1,7 +1,15 @@
 <h2>Board Details</h2>
 <div>
-    UID: {{brdDetail.data().UID}}<br>
-    <!--pictures: {{picRefs}}<br>-->
+    작성자 ID: {{brdDetail.data().UID}}<br>
+    작성자 이름 : {{brdDetail.data().name}}<br>
+    작성자 email : {{brdDetail.data().email}}<br>
+    제목 : {{brdDetail.data().brdTitle}}<br>
+    내용 : {{brdDetail.data().brdContents}}<br>
+    작성 시간 : {{brdDetail.data().brdTime.seconds * 1000 | date:'yyyy-MM-dd hh:mm a'}}<br>
+    사진들: 
+    <div *ngFor = "let file of picUrls">
+        <img src = "{{file}}"/>
+    </div>
 
 </div>
 
