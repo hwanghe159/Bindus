@@ -8,6 +8,7 @@ import { SignUp2Component } from './sign-up2/sign-up2.component';
 import { MainComponent } from './main/main.component';
 import { BoardComponent } from './board/board.component';
 import { DetailComponent } from './detail/detail.component';
+import { MypageComponent } from './mypage/mypage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'signup', component: SignUp2Component},
   { path: 'createboard', component: CreateBoardComponent},
   { path: 'board', component: BoardComponent},
-  { path: 'board/:id', component: DetailComponent }
+  { path: 'board/:id', component: DetailComponent },
+  { path: 'mypage', component: MypageComponent }
 ];
 
 @NgModule({
