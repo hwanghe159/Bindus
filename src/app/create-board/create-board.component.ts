@@ -55,6 +55,9 @@ export class CreateBoardComponent implements OnInit {
     //   console.log(res[5]);
     // })
     
+      
+   
+
   }
 
   // //파일 1개에 대하여 DB에 올리고 URL 반환
