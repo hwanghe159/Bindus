@@ -101,24 +101,23 @@ export class AuthService {
       });
 
   }
-  // let name = this.db.collection('user').doc(uid).ref.get().then(
-  //   function (doc) {
-  //     if (doc.exists) {
-  //       console.log(doc.data());
-  //       return name;
-  //     }
-  //   }
-  // )
 
-  // async getCurrrentUserName() {
-  //   let _uid = await this.getCurrentUserUID();
-  //   this.db.collection('user').doc(_uid).ref.get().then(
-  //     function (doc) {
-  //       if (doc.exists) { console.log(doc.data()); }
-  //       else { }
-  //     }
-  //   )
-  // }
 
- 
+  async getCurrentUser() {
+    let uid = await this.firebaseAuth.auth.currentUser.uid;
+    return this.db.collection('user').doc(uid).ref.get().then(
+      function (doc) {
+        if (doc.exists) {
+          console.log(doc.data());
+          return doc.data();
+    
+        }
+        else {
+          console.log("No such document!");
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+
+  }
 }
