@@ -28,6 +28,10 @@ import { BoardService } from './board.service';
 import { MypageComponent } from './mypage/mypage.component';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
+import { CategoryComponent } from './category/category.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
+import { MoimService } from './moim.service';
+
 
 @NgModule({
   declarations: [
@@ -41,8 +45,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     MainComponent,
     BoardComponent,
     //JwPaginationComponent,
-    DetailComponent,
-    MypageComponent
+    DetailComponent,    MypageComponent,
+    CategoryComponent,
+    CategoryDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
   ],
   providers: [
     AuthService,
-    BoardService
+    BoardService,
+    MoimService
   ],
   bootstrap: [AppComponent]
 })
