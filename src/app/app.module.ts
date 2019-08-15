@@ -4,9 +4,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from "src/environments/environment";
@@ -27,7 +25,9 @@ import { BoardComponent } from './board/board.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DetailComponent } from './detail/detail.component';
 import { BoardService } from './board.service';
-
+import { MypageComponent } from './mypage/mypage.component';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import { BoardService } from './board.service';
     MainComponent,
     BoardComponent,
     //JwPaginationComponent,
-    DetailComponent
+    DetailComponent,
+    MypageComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,10 @@ import { BoardService } from './board.service';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    TagInputModule, 
+    BrowserAnimationsModule
+
   ],
   providers: [
     AuthService,
@@ -65,3 +69,5 @@ import { BoardService } from './board.service';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

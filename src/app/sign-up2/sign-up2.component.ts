@@ -18,6 +18,8 @@ export class SignUp2Component implements OnInit {
   uid: string;
   email: string;
   users: Observable<any[]>;
+  hashItems = [];
+  rmvdhashItems = [];
 
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
     this.userInfo = this.formBuilder.group({
@@ -27,8 +29,12 @@ export class SignUp2Component implements OnInit {
       birthMonth: '',
       birthDate: '',
       email: '',
-      password: ''
+      password: '',
+      hashtag: []
+
     })
+
+
 
     this.userBasic = this.formBuilder.group({
       email: '',
@@ -41,22 +47,37 @@ export class SignUp2Component implements OnInit {
 
   }
 
-   tryRegister(value) {
-     this.authService.doRegister(value)
+  tryRegister(value) {
+    this.authService.doRegister(value)
       .then(res => {
         console.log(res.uid);
-     
+
       }, err => {
         console.log(err);
         this.errorMessage = err.message;
         this.successMessage = "";
       })
   }
-  
- 
-  onSubmit(value) {
 
-     this.tryRegister(value);
+  onItemRemoved(tag) {
+
+    this.hashItems.forEach((item, index) => {
+      if (item === tag) this.hashItems.splice(index, 1);
+      console.log("successfully deleted" + this.hashItems);
+
+    });
+
+  }
+
+  onTagSelected(tag) {
+
+
+    console.log("hash items" + this.hashItems);
+  }
+
+  onSubmit(value) {
+    this.userInfo.hashtag=this.hashItems;
+    this.tryRegister(value);
 
   }
 }

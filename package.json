@@ -26,7 +26,9 @@
     "firebase": "^6.3.0",
     "jw-angular-pagination": "^1.1.0",
     "ngx-bootstrap": "^5.1.0",
+    "ngx-chips": "^2.0.2",
     "ngx-pagination": "^4.1.0",
+    "ngx-tags-input": "^2.0.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
