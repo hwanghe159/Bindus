@@ -32,10 +32,15 @@ export class MoimService {
   };
   
   //영어이름으로 해당 카테고리 찾기
-  getOneCategory(engName: string) {
+  getOneCategory(engName: any) {
     this.getAllCategories();
     console.log(this.allCategories);//받아옴!
-    return of(this.allCategories.find(item => item.id === engName));
+
+    return this.db.collection("category").doc(engName).get().toPromise().then( (data) =>
+    {
+      return data.data();
+    })
+  
   }
 
   //영어 이름으로 oneCategoryMoims채우기

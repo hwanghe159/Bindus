@@ -12,13 +12,20 @@ export class CategoryDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private moimService: MoimService) { }
   
-  category: any;//이 카테고리의 모든 정보
+  category: object;//이 카테고리의 모든 정보
 
-  ngOnInit() {
+  async ngOnInit() {
     const engName = this.route.snapshot.paramMap.get('engName');
-    this.moimService.getOneCategory(engName).subscribe(doc => this.category = doc);
+    console.log(engName);
+  this.category = await this.moimService.getOneCategory(engName);
+     console.log(this.category);
+    // this.moimService.getOneCategory(engName).subscribe(doc => 
+    //   {
+    //   console.log(doc);
+    //   this.category = doc;
+    // });
 
-    console.log(this.category);
+    // console.log(this.category);
     
 
     //this.moimService.getMoims(engName);
