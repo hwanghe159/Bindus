@@ -29,6 +29,7 @@ export class DetailComponent implements OnInit {
   ngOnInit() {
     const brdSubId = this.route.snapshot.paramMap.get('id');
     this.boardService.getItem(brdSubId).subscribe(doc => this.brdDetail = doc);
+    console.log(this.brdDetail);//받아옴!
     this.getPictures();
   }
 

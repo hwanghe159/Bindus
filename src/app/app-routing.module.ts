@@ -9,6 +9,8 @@ import { MainComponent } from './main/main.component';
 import { BoardComponent } from './board/board.component';
 import { DetailComponent } from './detail/detail.component';
 import { MypageComponent } from './mypage/mypage.component';
+import { CategoryComponent } from './category/category.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -19,7 +21,9 @@ const routes: Routes = [
   { path: 'createboard', component: CreateBoardComponent},
   { path: 'board', component: BoardComponent},
   { path: 'board/:id', component: DetailComponent },
-  { path: 'mypage', component: MypageComponent }
+  { path: 'mypage', component: MypageComponent },
+  { path: 'category', component: CategoryComponent },
+  { path: 'category/:engName', component: CategoryDetailComponent }
 ];
 
 @NgModule({

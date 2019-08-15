@@ -27,6 +27,10 @@ import { BoardComponent } from './board/board.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DetailComponent } from './detail/detail.component';
 import { BoardService } from './board.service';
+import { MypageComponent } from './mypage/mypage.component';
+import { CategoryComponent } from './category/category.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
+import { MoimService } from './moim.service';
 
 
 @NgModule({
@@ -41,7 +45,10 @@ import { BoardService } from './board.service';
     MainComponent,
     BoardComponent,
     //JwPaginationComponent,
-    DetailComponent
+    DetailComponent,
+    MypageComponent,
+    CategoryComponent,
+    CategoryDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +67,8 @@ import { BoardService } from './board.service';
   ],
   providers: [
     AuthService,
-    BoardService
+    BoardService,
+    MoimService
   ],
   bootstrap: [AppComponent]
 })
