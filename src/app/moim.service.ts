@@ -40,7 +40,7 @@ export class MoimService {
 
   //영어 이름으로 oneCategoryMoims채우기
   getMoims(engName: string) {
-
+    
   }
   
 }
