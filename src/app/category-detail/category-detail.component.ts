@@ -13,7 +13,7 @@ export class CategoryDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private moimService: MoimService) { }
 
   category: object;//이 카테고리의 모든 정보
-  moims = [];
+  moims = [];//이 카테고리의 모든 모임
 
   async ngOnInit() {
 

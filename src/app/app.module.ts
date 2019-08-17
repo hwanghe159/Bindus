@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { CategoryComponent } from './category/category.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { MoimService } from './moim.service';
+import { MoimComponent } from './moim/moim.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { MoimService } from './moim.service';
     //JwPaginationComponent,
     DetailComponent,    MypageComponent,
     CategoryComponent,
-    CategoryDetailComponent
+    CategoryDetailComponent,
+    MoimComponent
   ],
   imports: [
     BrowserModule,
