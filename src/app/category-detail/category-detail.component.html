@@ -1,1 +1,10 @@
 <h1>{{category.korName}}의 상세페이지!</h1>
+
+
+<ul>
+    <li *ngFor="let m of moims; let i = index">
+      {{i}} {{m.title}}
+      {{m.leader}}
+      <img src="{{m.imgURL1}}">
+    </li>
+  </ul>
