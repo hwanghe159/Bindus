@@ -47,7 +47,7 @@ export class MoimService {
 
     return this.db.collection('moim').get().toPromise().then((data) =>
       data.query.where("category", "array-contains", engName).get().then((doc) => {
-        doc.docs.forEach(element => {
+        doc.forEach(element => {
           this.selectedMoims.push(element.data());
           console.log(element.data());
         });
