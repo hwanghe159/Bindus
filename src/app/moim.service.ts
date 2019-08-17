@@ -43,8 +43,8 @@ export class MoimService {
   }
 
   //영어 이름으로 oneCategoryMoims채우기
-  getMoims(engName: string) {
 
+  getMoims(engName: string) {
     return this.db.collection('moim').get().toPromise().then((data) =>
       data.query.where("category", "array-contains", engName).get().then((doc) => {
         doc.forEach(element => {
@@ -53,10 +53,8 @@ export class MoimService {
         });
         console.log(this.selectedMoims);
         return this.selectedMoims;
-
       })
     )
-
   }
 
 
