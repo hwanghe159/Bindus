@@ -16,7 +16,6 @@ export class CategoryDetailComponent implements OnInit {
   moims = [];
 
   async ngOnInit() {
-
     const engName = this.route.snapshot.paramMap.get('engName');
     console.log(engName);
     this.category = await this.moimService.getOneCategory(engName);

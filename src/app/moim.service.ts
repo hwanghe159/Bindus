@@ -45,6 +45,7 @@ export class MoimService {
   //영어 이름으로 oneCategoryMoims채우기
 
   getMoims(engName: string) {
+   this.selectedMoims=[];
     return this.db.collection('moim').get().toPromise().then((data) =>
       data.query.where("category", "array-contains", engName).get().then((doc) => {
         doc.forEach(element => {
