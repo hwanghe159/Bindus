@@ -37,14 +37,13 @@ export class MoimService {
   getOneCategory(engName: any) {
     this.getAllCategories();
     console.log(this.allCategories);//받아옴!
-
     return this.db.collection("category").doc(engName).get().toPromise().then((data) => {
       //return data.data();
       return data;
     })
-
   }
 
+  
   //영어 이름으로 selectedMoims채우고 반환
   getMoims(engName: string) {
     this.selectedMoims = [];

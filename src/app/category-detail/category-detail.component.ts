@@ -16,7 +16,6 @@ export class CategoryDetailComponent implements OnInit {
   moims = [];//이 카테고리의 모든 모임
 
   async ngOnInit() {
-
     const engName = this.route.snapshot.paramMap.get('engName');
     console.log(engName);
     this.category = await this.moimService.getOneCategory(engName);
