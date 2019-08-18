@@ -1,10 +1,12 @@
-<!-- <h1>{{category.korName}}의 상세페이지!</h1> -->
+<h1>{{category.data().korName}}의 상세페이지!</h1>
 
 
 <ul>
-    <li *ngFor="let m of moims; let i = index">
-      <img src="{{m.imgURL1}}" style="width:300px;"><br>
-      {{m.title}} <br>
-      {{m.leader}}<br>
-    </li>
-  </ul>
+  <li *ngFor="let m of moims; let i = index">
+    <a routerLink="/moim/{{m.id.substring(0,6)}}">
+      <img src="{{m.data().imgURL1}}" style="width:300px;"><br>
+      {{m.data().title}} <br>
+      {{m.data().leader}}<br>
+    </a>
+  </li>
+</ul>
