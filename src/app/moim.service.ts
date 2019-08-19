@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { of } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoimService {
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private authService: AuthService) { }
 
   allMoims = [];//모든 모임들
   allCategories = [];//모든 카테고리들
@@ -43,7 +44,7 @@ export class MoimService {
     })
   }
 
-  
+
   //영어 이름으로 selectedMoims채우고 반환
   getMoims(engName: string) {
     this.selectedMoims = [];
@@ -58,8 +59,8 @@ export class MoimService {
       })
     )
 
-    
-    
+
+
     // return this.db.collection('moim').get().toPromise().then((data) =>
     //   data.query.where("category", "array-contains", engName).get().then((doc) => {
     //     doc.forEach(element => {
@@ -77,8 +78,7 @@ export class MoimService {
     if (this.allMoims.length == 0) {
       this.getAllMoims();
     }
-    return of(this.allMoims.find(item => item.id.substring(0,6) === subId));
+    return of(this.allMoims.find(item => item.id.substring(0, 6) === subId));
   }
-
 
 }
