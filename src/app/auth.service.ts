@@ -22,6 +22,17 @@ export class AuthService {
 
   }
 
+  loggedin_uid: string;
+
+  async setLoggedinUid() {
+    try {
+      this.loggedin_uid = await this.firebaseAuth.auth.currentUser.uid;
+    }
+    catch (e) {
+      this.loggedin_uid = "0";
+    }
+  }
+
   //입력받은 이메일과 비밀번호로 auth등록
   doRegister(value) {
     return new Promise<any>((resolve, reject) => {
@@ -72,7 +83,12 @@ export class AuthService {
 
   //로그인되어 있는 uid반환
   async getCurrentUserUID() {
-    return await this.firebaseAuth.auth.currentUser.uid;
+    try {
+      return await this.firebaseAuth.auth.currentUser.uid;
+    }
+    catch (e) {
+      return "0";
+    }
   }
 
 
