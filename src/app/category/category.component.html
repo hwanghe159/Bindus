@@ -3,18 +3,17 @@
 
 
 <div style="display:inline">
-    <ul>
+    <ul style="list-style-type:none">
         <li *ngFor="let category of this.moimService.allCategories">
-            <div style="float:left; width:30%;">
+            <div style="float:left; width:33%; margin-bottom:5%">
                 <div class="card" style="width: 18rem;">
                     <a routerLink="/category/{{category.data().engName}}">
                         <img src="{{category.data().img}}" class="card-img-top" alt="..."></a>
-                    <div class="card-body">
+                    <div class="card-body" style="text-align:right;">
                         <p class="card-text">{{category.data().korName}}</p>
                     </div>
                 </div>
             </div>
-
             <!-- <a routerLink="/category/{{category.data().engName}}">
             #{{category.data().korName}}
         </a> -->
