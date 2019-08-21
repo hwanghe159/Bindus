@@ -2,8 +2,8 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @font-face {
     font-family: 'NanumBarunGothic';
-    src: url('src\assets\font\NanumBarunGothic.eot');
-    src: url('src\assets\font\NanumBarunGothic.eot') format('embedded-opentype'),
-    url('src\assets\font\NanumBarunGothic.woff') format('woff');
+    src: url('\assets\font\NanumBarunGothic.eot');
+    src: url('\assets\font\NanumBarunGothic.eot') format('embedded-opentype'),
+    url('\assets\font\NanumBarunGothic.woff') format('woff');
   }
   
