@@ -1,2 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@font-face {
+    font-family: 'NanumBarunGothic';
+    src: url('\assets\font\NanumBarunGothic.eot');
+    src: url('\assets\font\NanumBarunGothic.eot') format('embedded-opentype'),
+    url('\assets\font\NanumBarunGothic.woff') format('woff');
+  }
+  
