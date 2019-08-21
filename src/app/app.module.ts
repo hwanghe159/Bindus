@@ -32,6 +32,8 @@ import { CategoryComponent } from './category/category.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { MoimService } from './moim.service';
 import { MoimComponent } from './moim/moim.component';
+import { CreatePlaceComponent } from './create-place/create-place.component';
+import { CreateContentsComponent } from './create-contents/create-contents.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { MoimComponent } from './moim/moim.component';
     DetailComponent,    MypageComponent,
     CategoryComponent,
     CategoryDetailComponent,
-    MoimComponent
+    MoimComponent,
+    CreatePlaceComponent,
+    CreateContentsComponent
   ],
   imports: [
     BrowserModule,

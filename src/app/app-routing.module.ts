@@ -12,6 +12,8 @@ import { MypageComponent } from './mypage/mypage.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { MoimComponent } from './moim/moim.component';
+import { CreatePlaceComponent } from './create-place/create-place.component';
+import { CreateContentsComponent } from './create-contents/create-contents.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -25,7 +27,9 @@ const routes: Routes = [
   { path: 'mypage', component: MypageComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'category/:engName', component: CategoryDetailComponent },
-  { path: 'moim/:id', component: MoimComponent }
+  { path: 'moim/:id', component: MoimComponent },
+  { path: 'createplace', component: CreatePlaceComponent },
+  { path: 'createcontents', component: CreateContentsComponent },
 ];
 
 @NgModule({

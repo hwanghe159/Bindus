@@ -1,0 +1,40 @@
+
+<main role="main" class="container">
+    <br>
+    <br>
+    <br>
+    <div class="py-5 text-center">
+            <br>
+            <p class="location-subtitle">멋진 공간을 등록해주세요.</p>
+        </div>
+    
+
+    <form [formGroup]="this.placeService.form">
+        <div>
+            <input type="text" class="form-control" formControlName="location" placeholder="위치를 입력해주세요(예: 인천광역시 미추홀구 인하로 100)" required>
+            <br>
+            <input type="text" class="form-control" formControlName="place" placeholder="상세 위치를 입력해주세요(예: 그라지에 인하대점)" required>
+        </div>
+
+
+        <div>
+            <textarea class="form-control" rows="10" placeholder="날짜선택자리"></textarea>
+        </div>
+        <br>
+        <div class="custom-file">
+            <input #img type="file" class="custom-file-input" id="customFile" (change)="updateFile($event)"
+                accept=".png,.jpg" multiple>
+            <label class="custom-file-label" for="customFile" id="file_route">{{img.value}}</label>
+        </div>
+
+<br>
+<br>
+     <!-- 제출 버튼 -->
+        <div class="submit-button">
+            <button type="submit" class="btn btn-secondary btn-block" (click)="onSubmit()">등록하기</button>
+        </div>
+
+<br>
+<br>
+    </form>
+</main>
