@@ -1,6 +1,22 @@
-<h1>{{category.data().korName}}의 상세페이지!</h1>
-
-
+<br>
+<p class="heading">{{category.data().korName}} 카테고리의 모임입니다!</p>
+<div>
+  <ul style="list-style-type:none">
+    <li *ngFor="let m of moims; let i = index">
+        <div style="float:left; width:40%; margin:5%">
+            <div class="card" style="width:25rem">
+          <img class="card-img-top" src="{{m.data().imgURL1}}"  alt="Card image">
+          <div class="card-body">
+            <p class="card-title" style="text-align:center">{{m.data().title}}</p>
+            <p class="card-text" style="text-align:right">@{{m.data().place}}</p>
+            <a routerLink="/moim/{{m.id.substring(0,6)}}" class="btn btn-light">모임바로가기</a>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- 
 <ul>
   <li *ngFor="let m of moims; let i = index">
     <a routerLink="/moim/{{m.id.substring(0,6)}}">
@@ -9,4 +25,4 @@
       {{m.data().leader}}<br>
     </a>
   </li>
-</ul>
+</ul> -->

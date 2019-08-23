@@ -17,10 +17,11 @@ export class PlaceService {
     UID: new FormControl(''),
     location: new FormControl(''),
     place: new FormControl(''),
-    available: new FormControl(''),
+    time: new FormControl(''), 
+    contents:new FormControl(''),  
     pic1: new FormControl(''),
     pic2: new FormControl(''),
-    pic3: new FormControl(''),
+    pic3: new FormControl('')
   })
   
   createPlace(data) {
