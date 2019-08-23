@@ -21,16 +21,20 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class NavBarComponent implements OnInit {
 
   loginStatus: string;
-  constructor(private router: Router, private firebaseAuth: AngularFireAuth, private db: AngularFirestore) { }
+  constructor(
+    private router: Router, 
+    private firebaseAuth: AngularFireAuth, 
+    private db: AngularFirestore,
+    private authService: AuthService) { }
 
   uid: string;
   isValidUser: boolean;
   users:any;
+
   async ngOnInit() {
-    
     await this.checkLoggedIn();
-    
-    console.log(this.users);
+    // this.uid = await this.authService.getCurrentUserUID();
+    // console.log(this.uid);
   }
 
   async checkLoggedIn() {
@@ -45,6 +49,12 @@ export class NavBarComponent implements OnInit {
       console.log("checkedLoggedIn func() called");
   }
 
+  async mypage() {
+    this.uid = await this.authService.getCurrentUserUID();
+    console.log(this.uid);
+    let subUid=this.uid.substring(0,6);
+    this.router.navigate(['/page/'+subUid]);
+  }
 //  getCurrentUser() {
 //       return new Promise((resolve, reject) => {
 //          const unsubscribe= firebase.auth().onAuthStateChanged(user => {

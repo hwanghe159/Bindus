@@ -22,10 +22,25 @@ export class MoimComponent implements OnInit {
     private db: AngularFirestore) { }
 
   moim: any;//이 모임에 대한 정보
+  place_pics = [];//이 모임의 공간의 이미지들
+  users = [];//이 모임 참가자들의 doc 배열
 
-  ngOnInit() {
+
+  async ngOnInit() {
+    this.moimService.getAllCategories();
+    console.log(1);
     const subId = this.route.snapshot.paramMap.get('id');
-    this.moimService.getMoimBySubId(subId).subscribe(data => this.moim = data); 
+    console.log(2);
+    await this.moimService.getMoimBySubId(subId).subscribe(data => this.moim = data);
+    console.log(3);
+    this.place_pics = this.moim.data().placeimg;
+    console.log(4);
+    await this.getUsers();
+    console.log("this.moimService.allMoims : " + this.moimService.allMoims);
+    console.log("this.moimService.allCategories : " + this.moimService.allCategories);
+    console.log("this.moimService.oneCategoryMoims : " + this.moimService.oneCategoryMoims);
+    console.log("this.moimService.selectedMoims : " + this.moimService.selectedMoims);
+    console.log("this.moimService.moim : " + this.moimService.moim);
   }
 
 
@@ -58,7 +73,25 @@ export class MoimComponent implements OnInit {
     }
   }
 
+  //uid로 해당 user doc 반환
+  async getUserInfo(uid: string) {
+    //console.log(this.db.collection('user').doc(uid));
+    return this.db.collection('user').doc(uid).ref.get().then((doc) => 
+    { 
+      console.log(doc);
+      return doc; 
+    });
+  }
 
+  //해당 모임의 모든 참가자의 정보를 users배열에 저장
+  async getUsers() {
+    const uids = this.moim.data().UIDs;
+    console.log(uids);
+    for (let i=0; i<uids.length; i++) {
+      let data = await this.getUserInfo(uids[i]);
+      this.users.push(data);
+    }
+  }
 
 
   /*

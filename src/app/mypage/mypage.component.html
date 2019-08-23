@@ -2,11 +2,79 @@
     <div class="row">
         <div class="column"
             style="width:33%; height:max-content; border-right:1px solid #b2bec3; height: -webkit-fill-available;">
-            <p class="">{{user.name}}님의 프로필</p><br>
-            #{{user.hashtag[0]}} #{{user.hashtag[1]}} #{{user.hashtag[2]}}
+            <br><br>
+            <div style="text-align:center">
+                <img src="{{user.data().img}}" class="rounded-circle" alt="{{user.data().name}}님의 프로필 사진" width="100" height="100">
+                <br><br>
+                <h2>{{user.name}}</h2>
+                <br>
+                #{{user.data().hashtag[0]}} #{{user.data().hashtag[1]}} #{{user.data().hashtag[2]}}
+            </div>
+            <div>
+                <ul>
+                    <li *ngFor="let category of categories">
+                        <img src="{{category.data().badge_img2}}" width="80" height="100">
+                    </li>
+                </ul>
+
+            </div>
         </div>
-        <div class="column" style="width:66%;">
-            
+        <div class="column" style="width:66%">
+            <div>
+                <h3><br> 내가 참여한 모임들<br></h3>
+                <div class="card-deck">
+                    <li *ngFor="let moim of moims">
+                        <div class="card">
+                            <a routerLink="/moim/{{moim.id.substring(0,6)}}">
+                                <img src="{{moim.data().imgURL1}}" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{moim.data().title}}</h5>
+                                    <p class="card-text">{{moim.data().intro}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="column"
+            style="width:33%; height:max-content; border-right:1px solid #b2bec3; height: -webkit-fill-available;">
+            <br><br>
+            <div style="text-align:center">
+                <img src="{{user.img}}" class="rounded-circle" alt="{{user.name}}님의 프로필 사진" width="100" height="100">
+                <br><br>
+                <h2>{{user.name}}</h2>
+                <br>
+                #{{user.hashtag[0]}} #{{user.hashtag[1]}} #{{user.hashtag[2]}}
+            </div>
+        </div>
+        <div class="column" style="width:66%">
+            <div style="display:inline">
+                <h3><br> 내가 참여한 모임들<br></h3>
+                <div class="card-deck">
+                    <ul style="list-style-type:none">
+                        <li *ngFor="let moim of moims">
+                            <div style="float:left; width:33%; margin-bottom:5%">
+                                <div class="card" style="width:33%; float: left;">
+                                    <a routerLink="/moim/{{moim.id.substring(0,6)}}">
+                                        <img src="{{moim.data().imgURL1}}" class="card-img-top">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{moim.data().title}}</h5>
+                                            <p class="card-text">{{moim.data().intro}}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

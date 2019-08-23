@@ -12,14 +12,15 @@ import { Observable, of, from } from 'rxjs';
 export class AuthService {
 
   form = new FormGroup({ email: new FormControl(' '), password: new FormControl(' ') });
+
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
   uid: string;
   email: string;
   data:any;
+  
   constructor(private firebaseAuth: AngularFireAuth, private router: Router, private db: AngularFirestore) {
     this.user = firebaseAuth.authState;
-
   }
 
   loggedin_uid: string;
@@ -87,6 +88,7 @@ export class AuthService {
       return await this.firebaseAuth.auth.currentUser.uid;
     }
     catch (e) {
+      console.log(e);
       return "0";
     }
   }
@@ -136,4 +138,64 @@ export class AuthService {
       });
 
   }
+
+  async getAllUsers() {
+    let users = [];
+    return this.db.collection("user").get().toPromise().then(
+      function (data) {
+        data.forEach((doc => {
+          users.push(doc)
+        }))
+        return users;
+      });
+  }
+
+  //부분uid로 user 도큐먼트 얻기
+  async getUserDocfrom(subUid: string) {
+    let users = [];
+    users = await this.getAllUsers();
+    console.log(users);
+
+    if (users.length !== 0) {
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].id.includes(subUid)) {
+          return users[i];
+        }
+      }
+    }
+    else {
+      console.log("실패");
+    }
+  }
+
+  // async getAllUids() {
+  //   let uids = [];
+  //   return this.db.collection("user").get().toPromise().then(
+  //     function (data) {
+  //       data.forEach((doc => {
+  //         uids.push(doc.id)
+  //       }))
+  //       return uids;
+  //     });
+  // }
+
+  // //부분uid로 전체 uid얻기
+  // async getUIDfrom(subUid: string) {
+  //   console.log("getUIDfrom() 시작");
+  //   let uids = [];
+  //   uids = await this.getAllUids();
+  //   console.log(uids);
+
+  //   if (uids.length !== 0) {
+  //     for (var i = 0; i < uids.length; i++) {
+  //       console.log(i + "번째 점검 : " + uids[i] + "와 " + subUid + "와의 비교.");
+  //       if (uids[i].includes(subUid)) {
+  //         return uids[i];
+  //       }
+  //     }
+  //   }
+  //   else {
+  //     console.log("실패");
+  //   }
+  // }
 }

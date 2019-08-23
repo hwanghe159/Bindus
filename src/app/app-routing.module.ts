@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'createboard', component: CreateBoardComponent},
   { path: 'board', component: BoardComponent},
   { path: 'board/:id', component: DetailComponent },
-  { path: 'mypage', component: MypageComponent },
+  { path: 'page/:id', component: MypageComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'category/:engName', component: CategoryDetailComponent },
   { path: 'moim/:id', component: MoimComponent },

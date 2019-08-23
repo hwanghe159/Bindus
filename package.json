@@ -24,6 +24,7 @@
     "angularfire2": "^5.2.1",
     "bootstrap": "^4.3.1",
     "firebase": "^6.3.0",
+    "gm.datepicker-multi-select": "^1.0.10",
     "jw-angular-pagination": "^1.1.0",
     "ngx-bootstrap": "^5.1.0",
     "ngx-chips": "^2.0.2",
