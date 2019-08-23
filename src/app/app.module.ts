@@ -34,7 +34,7 @@ import { MoimService } from './moim.service';
 import { MoimComponent } from './moim/moim.component';
 import { CreatePlaceComponent } from './create-place/create-place.component';
 import { CreateContentsComponent } from './create-contents/create-contents.component';
-
+import { MatFormFieldModule,MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -70,7 +70,11 @@ import { CreateContentsComponent } from './create-contents/create-contents.compo
     NgbModule,
     NgxPaginationModule,
     TagInputModule, 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule
+
 
   ],
   providers: [
