@@ -1,39 +1,56 @@
-<h1>{{moim.data().title}}</h1>
-<h2>{{moim.data().intro}}</h2>
-
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width: 50%">
-    <div class="carousel-inner">
-        <div class="carousel-item {{i===0? 'active': ''}}" *ngFor='let pic of place_pics; let i = index'>
-            <img src={{pic}} class="d-block w-100" alt="...">
+<div>
+    <h1><br>{{moim.data().title}}</h1>
+</div>
+<div style="display: inline">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"
+        style="width: 50%;display: inline-block">
+        <div class="carousel-inner">
+            <div class="carousel-item {{i===0? 'active': ''}}" *ngFor='let pic of place_pics; let i = index'>
+                <img src={{pic}} class="d-block w-100" alt="...">
+            </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+    <div style="display: inline-block; vertical-align: top; font-size: 20px">
+        리더 : {{moim.data().leader}}<br>
+        장소 : {{moim.data().location}} {{moim.data().place}}<br>
+        일시 : {{moim.data().date.seconds * 1000 | date:'yyyy-MM-dd hh:mm a'}}<br>
+
+    </div>
 </div>
 
 <div>
-    리더 : {{moim.data().leader}}<br>
-    장소 : {{moim.data().location}} {{moim.data().place}}<br>
-    일시 : {{moim.data().date.seconds * 1000 | date:'yyyy-MM-dd hh:mm a'}}<br>
+
+    <div>
+        <h3>{{moim.data().intro}}</h3>
+    </div>
+    <br><br>
+    이 모임에 참여한 사람들
+
+    <div style="display: inline">
+
+        <ul>
+            <li *ngFor="let user of users" style="display: inline-block">
+
+                    <a routerLink="/page/{{user.id.substring(0,6)}}">
+                        <img src="{{user.data().img}}" class="rounded-circle" width="50" height="50">
+                    </a> 
+            </li>
+
+        </ul>
+    </div>
+
 </div>
 
-<div>
-    <button (click)="registrate()">신청하기</button>
-</div>
+
 
 <div>
-    이 모임에 참여한 사람들 :
-    <ul>
-        <li *ngFor="let user of users">
-            <a routerLink="/page/{{user.id.substring(0,6)}}">
-            <img src="{{user.data().img}}" class="rounded-circle" width="50" height="50">
-            </a>
-        </li>
-    </ul>
+    <button (click)="registrate()" class="btn btn-light">신청하기</button>
 </div>

@@ -5,6 +5,20 @@
 
             <div style="align-content: center">
                 <h2>정보를 입력해주세요.</h2>
+
+                <div class="container">
+                    <label>프로필 사진</label><br>
+                    <label class="hoverable" for="fileInput">
+                        <img
+                            [src]="url ? url : 'https://firebasestorage.googleapis.com/v0/b/test-38218.appspot.com/o/user%2Fuser.png?alt=media&token=811174cc-98ee-4f4f-bb59-f06bc405e92f'">
+                        <div class="hover-text">Choose file</div>
+                        <div class="background"></div>
+                    </label>
+                    <br />
+                    <input id="fileInput" type='file' (change)="onSelectFile($event)">
+                    <button *ngIf="url" (click)="delete()">지우기</button>
+                </div>
+
                 <div>
                     <div>
                         <label>이메일</label><br>
@@ -18,7 +32,7 @@
                             required>
                     </div>
                 </div>
-<br>
+                <br>
                 <div>
                     <div>
                         <label>이름 </label><br>
@@ -27,7 +41,7 @@
                     </div>
                     <br>
                 </div>
-<!-- 
+                <!-- 
       <div class="radio">
                     <label>성별</label><br>
                     <label class="radio-inline"><input class="form-control" type="radio" name="gender"
@@ -38,13 +52,13 @@
                 </div><br> -->
 
                 <div>
-                        <label class="radio-inline">
-                                <input type="radio" formControlName="gender" value="male" name="gender"  required >남
-                              </label>
-                              <label class="radio-inline">
-                                <input type="radio" formControlName="gender" value="female" name="gender"  required>여
-                              </label>
-   
+                    <label class="radio-inline">
+                        <input type="radio" formControlName="gender" value="male" name="gender" required>남
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" formControlName="gender" value="female" name="gender" required>여
+                    </label>
+
                 </div><br>
 
 
@@ -111,11 +125,13 @@
                     </div>
                 </div>
             </div>
-<br><br>
-<div>
-        <label>자신을 나타내는 키워드를 입력해주세요!</label><br>  
-        <tag-input formControlName="hashtag" secondaryPlaceholder="(최대3개)" placeholder="+" [modelAsStrings]="true" (onRemove)="onItemRemoved($event)"
-        (onAdd)="onTagSelected($event)" [maxItems]='3'></tag-input></div>
+            <br><br>
+            <div>
+                <label>자신을 나타내는 키워드를 입력해주세요!</label><br>
+                <tag-input formControlName="hashtag" secondaryPlaceholder="(최대3개)" placeholder="+"
+                    [modelAsStrings]="true" (onRemove)="onItemRemoved($event)" (onAdd)="onTagSelected($event)"
+                    [maxItems]='3'></tag-input>
+            </div>
 
             <div><br>
                 <div class="submit-button">
