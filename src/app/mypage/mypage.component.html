@@ -1,18 +1,19 @@
 <div class="container">
     <div class="row">
         <div class="column"
-            style="width:33%; height:max-content; border-right:1px solid #b2bec3; height: -webkit-fill-available;">
+            style="width:33%; height:initial; border-right:1px solid #b2bec3; ">
             <br><br>
             <div style="text-align:center">
-                <img src="{{user.data().img}}" class="rounded-circle" alt="{{user.data().name}}님의 프로필 사진" width="100" height="100">
+                <img src="{{user.data().img}}" class="rounded-circle" alt="{{user.data().name}}님의 프로필 사진" width="100"
+                    height="100">
                 <br><br>
                 <h2>{{user.data().name}}</h2>
                 <br>
-                #{{user.data().hashtag[0]}} #{{user.data().hashtag[1]}} #{{user.data().hashtag[2]}}
+               <p style="font-size:15pt; color:darkblue"> #{{user.data().hashtag[0]}} #{{user.data().hashtag[1]}} #{{user.data().hashtag[2]}}</p>
             </div>
             <div>
-                <ul>
-                    <li *ngFor="let category of categories">
+             <ul style="list-style-type:none;">
+                    <li *ngFor="let category of categories" style="display:inline">
                         <img src="{{category.data().badge_img2}}" width="80" height="100">
                     </li>
                 </ul>
@@ -20,20 +21,26 @@
             </div>
         </div>
         <div class="column" style="width:66%">
-            <div>
-                <h3><br> 내가 참여한 모임들<br></h3>
+            <div style="text-align:center">
+                <br>
+                <p style="font-size:16pt; magin-left:3px;">내가 참여한 모임들</p>
                 <div class="card-deck">
-                    <li *ngFor="let moim of moims">
-                        <div class="card">
-                            <a routerLink="/moim/{{moim.id.substring(0,6)}}">
-                                <img src="{{moim.data().imgURL1}}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{moim.data().title}}</h5>
-                                    <p class="card-text">{{moim.data().intro}}</p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
+                    <div style="display:inline">
+                            <ul style="list-style-type:none">
+                        <li *ngFor="let moim of moims">
+                            <div class="card" style="width:50%; display:inline-block; margin-bottom:5%">
+                                <a routerLink="/moim/{{moim.id.substring(0,6)}}">
+                                    <img src="{{moim.data().imgURL1}}" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{moim.data().title}}</h5>
+                                        <p style="text-align:center">{{moim.data().date.seconds * 1000 | date:'yyyy-MM-dd hh:mm a'}}</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

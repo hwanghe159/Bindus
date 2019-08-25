@@ -18,9 +18,9 @@ export class MoimService {
 
   getAllMoims() {
     this.allMoims = [];
-    this.db.collection("moim").get().toPromise().then((data) => {
+     this.db.collection("moim").get().toPromise().then((data) => {
       data.forEach((doc => {
-        this.allMoims.push(doc);
+        this.allMoims.push(doc); 
       }))
     });
   };
@@ -77,7 +77,6 @@ export class MoimService {
   getMoimBySubId(subId: string) {
     if (this.allMoims.length == 0) {
       this.getAllMoims();
-      console.log("allMoims가 비어있어서 채움");
     }
     return of(this.allMoims.find(item => item.id.substring(0, 6) === subId));
   }

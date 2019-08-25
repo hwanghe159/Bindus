@@ -21,7 +21,7 @@ export class CategoryDetailComponent implements OnInit {
     this.category = await this.moimService.getOneCategory(engName);
     console.log(this.category);
     this.moims=await this.moimService.getMoims(engName);
-    
+    this.moimService.getAllMoims();
     console.log(this.moims);
 
   }

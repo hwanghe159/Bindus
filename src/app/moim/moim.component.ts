@@ -26,16 +26,19 @@ export class MoimComponent implements OnInit {
   users = [];//이 모임 참가자들의 doc 배열
 
 
-  async ngOnInit() {
+   ngOnInit() {
     this.moimService.getAllCategories();
     console.log(1);
     const subId = this.route.snapshot.paramMap.get('id');
     console.log(2);
-    await this.moimService.getMoimBySubId(subId).subscribe(data => this.moim = data);
+    this.moimService.getMoimBySubId(subId).subscribe((data) => 
+    { this.moim = data
+      this.place_pics=data.data().placeimg;
+    }
+    );
     console.log(3);
-    this.place_pics = this.moim.data().placeimg;
     console.log(4);
-    await this.getUsers();
+    this.getUsers();
     console.log("this.moimService.allMoims : " + this.moimService.allMoims);
     console.log("this.moimService.allCategories : " + this.moimService.allCategories);
     console.log("this.moimService.oneCategoryMoims : " + this.moimService.oneCategoryMoims);
