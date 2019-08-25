@@ -34,6 +34,10 @@ export class CreateContentsComponent implements OnInit {
     this.contentsService.form.reset();
     this.uid = await this.authService.getCurrentUserUID();
     console.log("auth service.getCurrentUID() returns" + this.uid);
+    if (this.uid === "0") {
+      alert("로그인이 필요한 서비스입니다.");
+      this.router.navigate(['/login']);
+    }
     let email = await this.authService.getCurrentUserEmail();
     console.log("auth service.getCurrentEmail() returns" + email);
     this.user = await this.authService.getCurrentUserName();

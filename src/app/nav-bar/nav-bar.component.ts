@@ -51,9 +51,15 @@ export class NavBarComponent implements OnInit {
 
   async mypage() {
     this.uid = await this.authService.getCurrentUserUID();
-    console.log(this.uid);
-    let subUid=this.uid.substring(0,6);
-    this.router.navigate(['/page/'+subUid]);
+    if (this.uid != "0") {
+      console.log(this.uid);
+      let subUid = this.uid.substring(0, 6);
+      this.router.navigate(['/page/' + subUid]);
+    }
+    else {
+      alert('먼저 로그인을 해주세요.');
+      this.router.navigate(['/login']);
+    }
   }
 //  getCurrentUser() {
 //       return new Promise((resolve, reject) => {
@@ -106,10 +112,10 @@ export class NavBarComponent implements OnInit {
 
   login_logout() {
     console.log("버튼 클릭");
-
     if (this.loginStatus === "로그아웃") {//로그인 되어있을때
       firebase.auth().signOut().then(function () {
         console.log("로그아웃 성공");
+        this.router.navigate(['/']);
       }).catch(function (error) {
         // An error happened.
       });

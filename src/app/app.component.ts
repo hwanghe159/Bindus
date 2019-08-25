@@ -6,6 +6,7 @@ import { FormControl, FormGroup, FormsModule } from "@angular/forms";
 import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
 import { Observable, of, from } from 'rxjs';
 import { AuthService } from './auth.service';
+import { MoimService } from './moim.service';
 
 @Component({
   selector: 'app-root',
@@ -16,10 +17,15 @@ export class AppComponent implements OnInit {
   uid: string;
   isValidUser: boolean;
 
-  constructor(private authService: AuthService, private router: Router, private firebaseAuth: AngularFireAuth, private db: AngularFirestore) { }
+  constructor(private authService: AuthService, 
+    private router: Router, 
+    private firebaseAuth: AngularFireAuth, 
+    private db: AngularFirestore,
+    private moimService: MoimService) { }
 
   title = 'bindus';
   ngOnInit() {
+    this.moimService.getAllMoims();
   }
 
   async getUID() {
@@ -51,8 +57,5 @@ export class AppComponent implements OnInit {
         }
       )
     }
-  
-
-
   }//isGost function end
 }
