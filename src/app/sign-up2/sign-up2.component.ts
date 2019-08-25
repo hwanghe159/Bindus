@@ -16,12 +16,12 @@ export class SignUp2Component implements OnInit {
   successMessage: string;
   userInfo;
   userBasic;
-  uid: string ;
+  uid: string;
   email: string;
   users: Observable<any[]>;
   hashItems = [];
   rmvdhashItems = [];
-  url :string | ArrayBuffer;
+  url: string|ArrayBuffer;
   files: any;
   imageChanged: boolean;
   URL = "https://firebasestorage.googleapis.com/v0/b/test-38218.appspot.com/o/user%2Fuser.png?alt=media&token=811174cc-98ee-4f4f-bb59-f06bc405e92f";
@@ -95,16 +95,15 @@ export class SignUp2Component implements OnInit {
     this.files = event.target.files;
     this.imageChanged = true;
     console.log(this.files);
-    if (event.target.files && event.target.files[0]) {
-      
-      const reader: FileReader = new FileReader();
+    
 
-      
-      // var reader = new FileReader();
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-      reader.onload = (event) => { // called once readAsDataURL is completed
+      reader.onload = (event: Event) => { // called once readAsDataURL is completed
+        //this.url = event.target.result;
         this.url = reader.result;
       }
     }
