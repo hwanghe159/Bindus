@@ -74,7 +74,7 @@ export class CreatePlaceComponent implements OnInit {
     this.placeService.form.patchValue({ UID: this.uid });
     this.placeService.form.patchValue({ location: this.placeService.form.controls['location'].value });
     this.placeService.form.patchValue({ place: this.placeService.form.controls['place'].value });
-    this.placeService.form.patchValue({ time: this.placeService.form.controls['time'].value });
+    this.placeService.form.patchValue({ contents: this.placeService.form.controls['contents'].value });
 
     if (this.cnt >= 1) {
       this.placeService.form.patchValue({ pic1: this.URLs[0] });
