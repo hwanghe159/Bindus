@@ -81,13 +81,4 @@ export class MoimService {
     return of(this.allMoims.find(item => item.id.substring(0, 6) === subId));
   }
 
-  // //index로 한 모임에 대한 정보 반환
-  // getMoimBySubId(subId: string) {
-  //   if (this.allMoims.length == 0) {
-  //     this.getAllMoims();
-  //     console.log("allMoims가 비어있어서 채움");
-  //   }
-  //   return of(this.allMoims.find(item => item.id.substring(0, 6) === subId));
-  // }
-
 }

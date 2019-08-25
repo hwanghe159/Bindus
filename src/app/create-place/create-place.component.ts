@@ -25,6 +25,7 @@ export class CreatePlaceComponent implements OnInit {
   userInfo: Object;
   uid: string;
   dateItems :Array<any>;
+  
   constructor(private storage: AngularFireStorage, private formBuilder: FormBuilder, private placeService: PlaceService,
     private authService: AuthService, private router: Router, private db: AngularFirestore) {
   }

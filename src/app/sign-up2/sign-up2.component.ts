@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, FormBuilder } from "@angular/forms";
 import * as firebase from "firebase";
 import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-sign-up2',
@@ -20,8 +21,12 @@ export class SignUp2Component implements OnInit {
   users: Observable<any[]>;
   hashItems = [];
   rmvdhashItems = [];
+  url = "";
+  files: any;
+  imageChanged: boolean;
+  URL = "https://firebasestorage.googleapis.com/v0/b/test-38218.appspot.com/o/user%2Fuser.png?alt=media&token=811174cc-98ee-4f4f-bb59-f06bc405e92f";
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private storage: AngularFireStorage) {
     this.userInfo = this.formBuilder.group({
       name: '',
       gender: '',
@@ -30,8 +35,8 @@ export class SignUp2Component implements OnInit {
       birthDate: '',
       email: '',
       password: '',
-      hashtag: []
-
+      hashtag: [],
+      img: ''
     })
 
 
@@ -70,14 +75,40 @@ export class SignUp2Component implements OnInit {
   }
 
   onTagSelected(tag) {
-
-
     console.log("hash items" + this.hashItems);
   }
 
-  onSubmit(value) {
-    this.userInfo.hashtag=this.hashItems;
-    this.tryRegister(value);
-
+  async onSubmit(value) {
+    this.userInfo.hashtag = this.hashItems;
+    console.log(this.imageChanged);
+    if (this.imageChanged) {
+      let filePath = '/user/' + 'pic' + Math.floor(Math.random() * 1000000);
+      const snapshot = await this.storage.upload(filePath, this.files[0]);
+      this.URL = await snapshot.ref.getDownloadURL();
+      console.log(this.URL);
+    }
+    this.userInfo.value.img = this.URL;
+    await this.tryRegister(value);
   }
+
+  onSelectFile(event) {
+    this.files = event.target.files;
+    this.imageChanged = true;
+    console.log(this.files);
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+      }
+    }
+  }
+  public delete(){
+    this.url = null;
+    this.imageChanged = false;
+  }
+
+
 }
