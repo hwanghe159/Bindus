@@ -1,1 +1,60 @@
-<p>create-contents works!</p>
+<main role="main" class="container">
+    <br>
+    <br>
+    <br>
+    <div class="py-5 text-center">
+        <br>
+        <p class="heading">컨텐츠를 등록해주세요.</p>
+    </div>
+
+
+    <form [formGroup]="this.contentsService.form">
+        <div>
+            <input type="text" class="form-control" formControlName="title"
+                placeholder="진행하고자 하는 컨텐츠의 타이틀을 입력해주세요!" required>
+            <br><br>
+        </div>
+        <div>
+            <input type="text" class="form-control" formControlName="intro"
+                placeholder="진행하고자 하는 컨텐츠의 소개글을 입력해주세요!" required>
+            <br>
+        </div>
+    
+        <div>
+            <br>
+            <input type="text" class="form-control" formControlName="time"
+                placeholder="가능한시간을 자유롭게 입력해주세요! (매주 월요일 7~10시, 8월 23일 10시~13시 등)">
+            <br>
+        </div>
+        <div>
+            <br>
+            <input type="text" class="form-control" formControlName="location" 
+                placeholder="희망하는 지역을 입력해주세요! (예: 인천광역시 미추홀구)">
+            <br>
+        </div>
+
+        <div>
+            <br>
+            <input type="text" class="form-control" formControlName="career" 
+                placeholder="해당 컨텐츠에 대한 경력을 입력해주세요!">
+            <br>
+        </div>
+
+            
+        <div>
+            <br>
+            <input type="text" class="form-control" formControlName="price" 
+                placeholder="희망하는 인당 참가비를 입력해주세요! (예: 20000)">
+            <br>
+        </div>
+        <br>
+        <br>
+        <!-- 제출 버튼 -->
+        <div class="submit-button">
+            <button type="submit" class="btn btn-secondary btn-block" (click)="onSubmit()">등록하기</button>
+        </div>
+
+        <br>
+        <br>
+    </form>
+</main>
