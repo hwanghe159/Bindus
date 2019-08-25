@@ -5,7 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
-
+import { FormControl, FormGroup, FormsModule } from "@angular/forms";
 
 
 @Component({
@@ -15,17 +15,32 @@ import * as firebase from 'firebase/app';
 })
 export class MoimComponent implements OnInit {
 
-  constructor(private moimService: MoimService, 
-    private route: ActivatedRoute, 
+  constructor(private moimService: MoimService,
+    private route: ActivatedRoute,
     private firebaseAuth: AngularFireAuth,
     private authService: AuthService,
-    private db: AngularFirestore) { }
+    private db: AngularFirestore) {
+    this.config = {
+      itemsPerPage: 5,
+      currentPage: 1,
+      totalItems: this.cnt
+    };
+  }
+
+  reviewForm = new FormGroup({
+    uid: new FormControl(''),
+    writer: new FormControl(''),
+    content: new FormControl(''),
+    time: new FormControl(''),
+  })
 
   moim: any;//이 모임에 대한 정보
   place_pics = [];//이 모임의 공간의 이미지들
   users = [];//이 모임 참가자들의 doc 배열
-  reviews = [];
-
+  
+  reviews = [];//이 모임의 리뷰들의 doc 배열
+  config: any;
+  cnt: number;
 
   async ngOnInit() {
     await this.moimService.getAllCategories();
@@ -46,6 +61,7 @@ export class MoimComponent implements OnInit {
     console.log("this.moimService.selectedMoims : " + this.moimService.selectedMoims);
     console.log("this.moimService.moim : " + this.moimService.moim);
     await this.getReviews();
+    console.log(this.reviews);
   }
 
 
@@ -99,7 +115,40 @@ export class MoimComponent implements OnInit {
   }
 
   getReviews() {
-    //return this.moim.doc(this.moim.id).get().collection()
+    return this.db.collection('moim').doc(this.moim.id).ref.collection('review').get().then(querySnapshot =>
+      querySnapshot.forEach(doc => {
+        this.reviews.push(doc);
+      }));
+  }
+
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
+
+  async onSubmit() {
+    let uid = await this.authService.getCurrentUserUID();
+    if (uid != "0") {//로그인 상태일때
+      let name = await this.authService.getCurrentUserName();
+      let time = firebase.firestore.Timestamp.now();
+
+      this.reviewForm.patchValue({ uid: uid });
+      this.reviewForm.patchValue({ writer: name });
+      this.reviewForm.patchValue({ content: this.reviewForm.controls['content'].value });
+      this.reviewForm.patchValue({ time: time });
+
+      let data = this.reviewForm.value;
+      this.createReview(data).then(res => { });
+      alert('리뷰가 등록되었습니다.');
+    }
+    else {
+      alert('먼저 로그인을 해주세요.');
+    }
+  }
+
+  createReview(data) {
+    return new Promise<any>((resolve, reject) => {
+      this.db.collection('/moim').doc(this.moim.id).collection('/review').add(data);
+    });
   }
 
   /*
