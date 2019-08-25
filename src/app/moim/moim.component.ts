@@ -24,26 +24,28 @@ export class MoimComponent implements OnInit {
   moim: any;//이 모임에 대한 정보
   place_pics = [];//이 모임의 공간의 이미지들
   users = [];//이 모임 참가자들의 doc 배열
+  reviews = [];
 
 
-   ngOnInit() {
-    this.moimService.getAllCategories();
+  async ngOnInit() {
+    await this.moimService.getAllCategories();
     console.log(1);
-    const subId = this.route.snapshot.paramMap.get('id');
+    const subId = await this.route.snapshot.paramMap.get('id');
     console.log(2);
-    this.moimService.getMoimBySubId(subId).subscribe((data) => 
-    { this.moim = data
-      this.place_pics=data.data().placeimg;
+    this.moimService.getMoimBySubId(subId).subscribe((data) => {
+      this.moim = data;
+      this.place_pics = data.data().placeimg;
     }
     );
     console.log(3);
     console.log(4);
-    this.getUsers();
+    await this.getUsers();
     console.log("this.moimService.allMoims : " + this.moimService.allMoims);
     console.log("this.moimService.allCategories : " + this.moimService.allCategories);
     console.log("this.moimService.oneCategoryMoims : " + this.moimService.oneCategoryMoims);
     console.log("this.moimService.selectedMoims : " + this.moimService.selectedMoims);
     console.log("this.moimService.moim : " + this.moimService.moim);
+    await this.getReviews();
   }
 
 
@@ -96,6 +98,9 @@ export class MoimComponent implements OnInit {
     }
   }
 
+  getReviews() {
+    //return this.moim.doc(this.moim.id).get().collection()
+  }
 
   /*
   async isContains(uid: string) {
