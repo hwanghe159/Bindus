@@ -29,20 +29,21 @@ export class NavBarComponent implements OnInit {
 
   uid: string;
   isValidUser: boolean;
-  users:any;
+  user: any;
 
   async ngOnInit() {
     await this.checkLoggedIn();
-    // this.uid = await this.authService.getCurrentUserUID();
-    // console.log(this.uid);
+    //this.uid = await this.authService.getCurrentUserUID();
+    //console.log(this.uid);
   }
 
   async checkLoggedIn() {
     this.firebaseAuth.authState.subscribe((gUser: any) => {
-      if (gUser) { 
+      if (gUser) { //로그인 상태일때
         this.loginStatus = "로그아웃";
         this.router.navigate(['/']);
-      } else {
+        this.uid = gUser.uid;
+      } else { //로그아웃 상태일때
         this.loginStatus = "로그인";
       }
     })
