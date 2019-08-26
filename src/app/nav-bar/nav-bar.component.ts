@@ -30,7 +30,10 @@ export class NavBarComponent implements OnInit {
   uid: string;
   isValidUser: boolean;
   users:any;
-
+  collapsed = true;
+  toggleCollapsed(): void {
+    this.collapsed = !this.collapsed;
+  }
   async ngOnInit() {
     await this.checkLoggedIn();
     // this.uid = await this.authService.getCurrentUserUID();

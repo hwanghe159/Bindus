@@ -21,7 +21,7 @@ export class MoimComponent implements OnInit {
     private authService: AuthService,
     private db: AngularFirestore) {
     this.config = {
-      itemsPerPage: 5,
+      itemsPerPage: 10,
       currentPage: 1,
       totalItems: this.cnt
     };
